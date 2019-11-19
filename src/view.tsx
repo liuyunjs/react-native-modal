@@ -112,31 +112,33 @@ export default class ModalView extends React.PureComponent<ModalViewProps> {
     } = this.props;
 
     return (
-      <Animated.View
-        pointerEvents="box-none"
-        style={[
-          StyleSheet.absoluteFillObject,
-          {
-            alignItems: getHorizontalLayout(horizontalLayout!),
-            justifyContent: getVerticalLayout(verticalLayout!),
-          },
-          this.getInterpolate(),
-        ]}
-      >
+      <View pointerEvents="box-none" style={StyleSheet.absoluteFillObject}>
         {this.renderMask()}
-        <View
-          pointerEvents="auto"
+        <Animated.View
+          pointerEvents="box-none"
           style={[
+            StyleSheet.absoluteFillObject,
             {
-              backgroundColor,
-              width: ifTrueFullScreen(horizontalLayout!),
-              height: ifTrueFullScreen(verticalLayout!),
+              alignItems: getHorizontalLayout(horizontalLayout!),
+              justifyContent: getVerticalLayout(verticalLayout!),
             },
+            this.getInterpolate(),
           ]}
         >
-          {children}
-        </View>
-      </Animated.View>
+          <View
+            pointerEvents="auto"
+            style={[
+              {
+                backgroundColor,
+                width: ifTrueFullScreen(horizontalLayout!),
+                height: ifTrueFullScreen(verticalLayout!),
+              },
+            ]}
+          >
+            {children}
+          </View>
+        </Animated.View>
+      </View>
     );
   }
 }

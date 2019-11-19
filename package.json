@@ -1,9 +1,8 @@
 {
-  "name": "react-native-modal-view",
-  "version": "0.0.1",
-  "private": true,
+  "name": "react-native-smart-modal",
+  "version": "0.0.2",
+  "private": false,
   "main": "./lib/modal.js",
-  "module": "./lib/modal.es.js",
   "types": "./lib/src/index.d.ts",
   "scripts": {
     "android": "react-native run-android",
