@@ -1,5 +1,5 @@
 {
-  "name": "modal",
+  "name": "react-native-modal-view",
   "version": "0.0.1",
   "private": true,
   "main": "./lib/modal.js",
@@ -11,6 +11,14 @@
     "start": "react-native start",
     "test": "jest",
     "build": "rollup --config rollup.config.js"
+  },
+
+  "bugs": {
+    "url": "https://github.com/liuyunjs/react-native-modal/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liuyunjs/react-native-modal"
   },
   "dependencies": {
     "react-native-portal-view": "^0.0.3",
