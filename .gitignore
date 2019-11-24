@@ -66,3 +66,6 @@ buck-out/
 tmp
 lib
 dist
+
+App.tsx
+index.ts

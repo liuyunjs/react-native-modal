@@ -5,8 +5,14 @@
  * @version 0.0.1
  **/
 
-import {portalHOC} from 'react-native-portal-view';
-import ModalAction from './action';
-export * from './types';
+import {Modal} from './container';
 
-export default portalHOC(ModalAction);
+export * from './portal';
+export * from './types';
+export * from './local';
+export * from './container';
+
+export default Modal;
+
+
+
