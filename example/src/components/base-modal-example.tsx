@@ -14,16 +14,12 @@ export default class extends React.PureComponent<ModalProps> {
     visible: false,
   };
 
-  ref: React.Ref<any> = React.createRef();
-
   onChange = (visible: boolean) => this.setState({visible});
 
   close = () => this.onChange(false);
 
   open = () => {
     this.onChange(true);
-
-    console.log(this.ref);
   };
 
   renderChild(): React.ReactElement | null {
@@ -42,16 +38,17 @@ export default class extends React.PureComponent<ModalProps> {
         </View>
         <Modal
           {...this.getProps()}
-          ref={this.ref}
           onChange={this.onChange}
-          visible={this.state.visible}>
+          visible={this.state.visible}
+        >
           <View
             style={{
               alignItems: 'center',
               height: 300,
               justifyContent: 'center',
               backgroundColor: 'red',
-            }}>
+            }}
+          >
             {this.renderChild()}
 
             <Text onPress={this.close}>close</Text>

@@ -11,8 +11,7 @@
   "dependencies": {
     "react": "16.9.0",
     "react-native": "0.61.4",
-    "react-native-smart-modal": "^0.0.6",
-    "react-native-portal-view": "^0.0.20"
+    "react-native-smart-modal": "^0.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

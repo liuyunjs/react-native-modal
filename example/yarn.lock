@@ -4998,15 +4998,6 @@ react-native-animatable@^1.3.3:
   dependencies:
     prop-types "^15.7.2"
 
-react-native-portal-view@^0.0.18:
-  version "0.0.18"
-  resolved "https://registry.npmjs.org/react-native-portal-view/-/react-native-portal-view-0.0.18.tgz#46e7e52e597d07cae95549883048f065fd9345e9"
-  integrity sha512-rUzcZy4Tic2dgJhhpT5fO4vrpm64qm+kHye44g5+t/3CaXBJt4nnwFt/E71fqWq8pmaQYkjeJOYHq0iu+nBzsQ==
-  dependencies:
-    hoist-non-react-statics "^3.3.1"
-    react-native-root-siblings "^4.0.4"
-    tslib "^1.10.0"
-
 react-native-portal-view@^0.0.20:
   version "0.0.20"
   resolved "https://registry.npmjs.org/react-native-portal-view/-/react-native-portal-view-0.0.20.tgz#de815b44a8f3b59bf714bb4d7646bc1cf8d47141"
@@ -5023,13 +5014,13 @@ react-native-root-siblings@^4.0.4:
   dependencies:
     static-container "^1.5.1"
 
-react-native-smart-modal@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.npmjs.org/react-native-smart-modal/-/react-native-smart-modal-0.0.5.tgz#d11310230abedfbc9fd30e130ba13b5ca38c7ad9"
-  integrity sha512-3ty3kTi6Q1srW1HvZl/28uhcsUoqxkjPj2c6SXQwlyQbPMOFmeZlaL3QEb/17llCWY33//bWmmk1f0QqcKDDFQ==
+react-native-smart-modal@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.npmjs.org/react-native-smart-modal/-/react-native-smart-modal-0.0.9.tgz#95f5a20831dda3447a26b83357b1bf22a886eb61"
+  integrity sha512-ab6plm2PF04sPy/hfMw2gygGkL8BfNLCGprw2Hr0Y5OeqOVzhVb7DO53e4NUpRm9l1MrkFnEfaJaLN7HNZ03AA==
   dependencies:
     react-native-animatable "^1.3.3"
-    react-native-portal-view "^0.0.18"
+    react-native-portal-view "^0.0.20"
     tslib "^1.10.0"
 
 react-native@0.61.4:
