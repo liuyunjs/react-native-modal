@@ -2,7 +2,7 @@
  * @Description : modal
  * @Create on : 2019/11/21 21:59
  * @author liuyunjs
- * @version 0.0.1
+ * @version 0.0.6
  **/
 
 import * as React from 'react';
@@ -16,14 +16,22 @@ import {
   EventSubscription,
 } from 'react-native';
 import * as animatable from 'react-native-animatable';
-import merge from 'lodash/merge';
-import {initializeAnimations, getLayout, width, height} from './utils';
+import {
+  initializeAnimations,
+  getLayout,
+  width,
+  height,
+  registorAnimation,
+} from './utils';
 import {LocalModalProps, LocalModalState} from './types';
 
 // 重置 react-native-animatable 默认的动画
 initializeAnimations();
 
-export class LocalModal extends React.PureComponent<LocalModalProps, LocalModalState> {
+export class LocalModal extends React.PureComponent<
+  LocalModalProps,
+  LocalModalState
+> {
   static defaultProps: LocalModalProps = {
     visible: true,
     mask: true,
@@ -54,18 +62,39 @@ export class LocalModal extends React.PureComponent<LocalModalProps, LocalModalS
   // 键盘状态标识
   private keyboardShow?: boolean;
 
+  // 遮罩
+  private maskRef: React.RefObject<any>;
+  // 内容
+  private contentRef: React.RefObject<any>;
+
+  // 正在动画
+  private isTransition: boolean;
+
+  private animationIn: string;
+  private animationOut: string;
+
   constructor(props: LocalModalProps) {
     super(props);
-    const {visible} = props;
+    const {visible, animationIn, animationOut} = props;
+
+    this.animationIn = registorAnimation(animationIn!);
+    this.animationOut = registorAnimation(animationOut!);
 
     this.state = {
       visible,
       visibleProps: visible,
       mount: visible,
     };
+
+    this.maskRef = React.createRef();
+    this.contentRef = React.createRef();
+    this.isTransition = false;
   }
 
-  static getDerivedStateFromProps(nextProps: LocalModalProps, prevState: LocalModalState): LocalModalState | null {
+  static getDerivedStateFromProps(
+    nextProps: LocalModalProps,
+    prevState: LocalModalState,
+  ): LocalModalState | null {
     const {visible} = nextProps;
 
     // props 中的 visible 状态改变的时候同步到 state 中
@@ -90,13 +119,24 @@ export class LocalModal extends React.PureComponent<LocalModalProps, LocalModalS
     if (keyboardDismissWillHide) {
       this.addKeyboardListener();
     }
+
+    if (this.state.visible) {
+      this.toggle();
+    }
   }
 
-  componentDidUpdate(prevProps: LocalModalProps) {
+  componentDidUpdate(prevProps: LocalModalProps, prevState: LocalModalState) {
     // 支持动态改变是否需要组件去控制键盘关闭
-    const {keyboardDismissWillHide, visible} = this.props;
+    const {keyboardDismissWillHide} = this.props;
     if (keyboardDismissWillHide !== prevProps.keyboardDismissWillHide) {
-      keyboardDismissWillHide ? this.addKeyboardListener() : this.removeKeyboardListener();
+      keyboardDismissWillHide
+        ? this.addKeyboardListener()
+        : this.removeKeyboardListener();
+    }
+    const {visible} = this.state;
+
+    if (visible !== prevState.visible) {
+      this.toggle();
     }
   }
 
@@ -107,12 +147,57 @@ export class LocalModal extends React.PureComponent<LocalModalProps, LocalModalS
     this.removeKeyboardListener();
   }
 
+  async toggle(): Promise<any> {
+    if (this.isTransition) {
+      // this.stop();
+      // this.toggle(animated);
+      return;
+    }
+    const {
+      animationInTiming,
+      animationOutTiming,
+      maskAnimationInTiming,
+      maskAnimationOutTiming,
+    } = this.props;
+    const {visible} = this.state;
+    if (this.maskRef.current) {
+      const toValue = this.choose(1, 0);
+      this.maskRef.current.transitionTo(
+        {
+          opacity: toValue,
+        },
+        this.choose(maskAnimationInTiming!, maskAnimationOutTiming!),
+      );
+    }
+    if (this.contentRef.current) {
+      this.isTransition = true;
+      const animation = this.choose(this.animationIn, this.animationOut);
+      const animationTiming = this.choose(
+        animationInTiming,
+        animationOutTiming,
+      );
+      this.onAnimationBegin();
+      await this.contentRef.current[animation](animationTiming);
+      this.isTransition = false;
+      if (this.state.visible !== visible) {
+        return this.toggle();
+      }
+      this.onAnimationEnd();
+    }
+  }
+
   /**
    * 绑定键盘 收起/弹出 事件
    */
   private addKeyboardListener() {
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.onKeyboardDidHide);
-    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.onKeyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this.onKeyboardDidHide,
+    );
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this.onKeyboardDidShow,
+    );
   }
 
   /**
@@ -206,8 +291,6 @@ export class LocalModal extends React.PureComponent<LocalModalProps, LocalModalS
       maskBackgroundColor,
       deviceWidth,
       deviceHeight,
-      maskAnimationOutTiming,
-      maskAnimationInTiming,
       useNativeDriver,
     } = this.props;
     const {visible} = this.state;
@@ -220,10 +303,7 @@ export class LocalModal extends React.PureComponent<LocalModalProps, LocalModalS
     // 遮罩组件
     const component = (
       <animatable.View
-        // 动画方式，遮罩的动画方式为淡入淡出
-        animation={this.choose('fadeIn', 'fadeOut')}
-        // 动画时间
-        duration={this.choose(maskAnimationInTiming, maskAnimationOutTiming)}
+        ref={this.maskRef}
         // 在模态框关闭的时候设置不响应任何事件
         pointerEvents={visible ? 'auto' : 'none'}
         // 是否开启原生动画
@@ -234,6 +314,7 @@ export class LocalModal extends React.PureComponent<LocalModalProps, LocalModalS
             backgroundColor: maskBackgroundColor,
             width: deviceWidth,
             height: deviceHeight,
+            opacity: 0,
           },
         ]}
       />
@@ -248,7 +329,7 @@ export class LocalModal extends React.PureComponent<LocalModalProps, LocalModalS
       <TouchableWithoutFeedback onPress={this.close}>
         {component}
       </TouchableWithoutFeedback>
-    )
+    );
   }
 
   /**
@@ -259,10 +340,6 @@ export class LocalModal extends React.PureComponent<LocalModalProps, LocalModalS
       style,
       avoidKeyboard,
       children,
-      animationOut,
-      animationIn,
-      animationOutTiming,
-      animationInTiming,
       verticalLayout,
       horizontalLayout,
     } = this.props;
@@ -270,28 +347,17 @@ export class LocalModal extends React.PureComponent<LocalModalProps, LocalModalS
     // 模态框内容
     const content = (
       <animatable.View
-        // 动画开始
-        onAnimationBegin={this.onAnimationBegin}
-        // 动画结束
-        onAnimationEnd={this.onAnimationEnd}
-        // 动画方式
-        animation={this.choose(animationIn, animationOut)}
-        // 动画时间
-        duration={this.choose(animationInTiming, animationOutTiming)}
+        ref={this.contentRef}
         // 容器本身不响应任何事件
         pointerEvents="box-none"
         style={[
           styles.content,
-          merge(
-            {},
-            style,
-            {
-              justifyContent: getLayout(verticalLayout),
-              alignItems: getLayout(horizontalLayout),
-            },
-          ),
-        ]}
-      >
+          style,
+          {
+            justifyContent: getLayout(verticalLayout),
+            alignItems: getLayout(horizontalLayout),
+          },
+        ]}>
         {children}
       </animatable.View>
     );
@@ -303,8 +369,7 @@ export class LocalModal extends React.PureComponent<LocalModalProps, LocalModalS
         <KeyboardAvoidingView
           style={styles.content}
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-          pointerEvents="box-none"
-        >
+          pointerEvents="box-none">
           {content}
         </KeyboardAvoidingView>
       );
@@ -316,11 +381,13 @@ export class LocalModal extends React.PureComponent<LocalModalProps, LocalModalS
   render() {
     const {mount} = this.state;
 
-    return mount && (
-      <View pointerEvents="box-none" style={styles.container}>
-        {this.renderMask()}
-        {this.renderContent()}
-      </View>
+    return (
+      mount && (
+        <View pointerEvents="box-none" style={styles.container}>
+          {this.renderMask()}
+          {this.renderContent()}
+        </View>
+      )
     );
   }
 }

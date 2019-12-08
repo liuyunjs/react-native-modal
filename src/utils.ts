@@ -7,7 +7,7 @@
 
 import * as animatable from 'react-native-animatable';
 import {Dimensions} from 'react-native';
-import {CustomAnimation} from 'react-native-animatable';
+import {CustomAnimation, Animation} from 'react-native-animatable';
 
 import {HorizontalLayout, VerticalLayout} from './types';
 
@@ -15,7 +15,9 @@ import {HorizontalLayout, VerticalLayout} from './types';
  * 解析模态框中的内容的位置设置成所对应的样式
  * @param layout
  */
-export function getLayout(layout?: HorizontalLayout | VerticalLayout): 'flex-end' | 'flex-start' | 'center' | undefined {
+export function getLayout(
+  layout?: HorizontalLayout | VerticalLayout,
+): 'flex-end' | 'flex-start' | 'center' | undefined {
   switch (layout) {
     case 'left':
     case 'top':
@@ -59,3 +61,18 @@ export const makeSlideTranslation = (
     [translationType]: toValue,
   },
 });
+
+export function registorAnimation(
+  animation: Animation | CustomAnimation,
+): string {
+  if (isObject(animation)) {
+    const animationName = JSON.stringify(animation);
+    animatable.registerAnimation(animationName, animation as CustomAnimation);
+    return animationName;
+  }
+  return animation as string;
+}
+
+function isObject(obj: any): boolean {
+  return obj !== null && typeof obj === 'object';
+}

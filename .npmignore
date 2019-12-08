@@ -2,8 +2,5 @@
 tmp
 ios
 android
-*.lock
 node_modules
-
-index.ts
-App.tsx
+example

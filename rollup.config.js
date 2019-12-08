@@ -13,7 +13,8 @@ import pkg from './package.json';
 
 const typescriptConfig = {
   cacheRoot: 'tmp/.rpt2_cache',
-  typescript: require('typescript')
+  typescript: require('typescript'),
+  useTsconfigDeclarationDir: true,
 };
 
 const noDeclarationConfig = Object.assign({}, typescriptConfig, {
@@ -32,7 +33,7 @@ const deps = Object.keys(pkg.dependencies || {});
 const peerDeps = Object.keys(pkg.peerDependencies || {});
 
 const config = {
-  input: 'src/index.ts',
+  input: 'index.ts',
   external: makeExternalPredicate(deps.concat(peerDeps))
 };
 

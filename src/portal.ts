@@ -13,7 +13,7 @@ const portalModal = createPortal(LocalModal);
 export const show = portalModal.show;
 export const hide = portalModal.hide;
 export const update = portalModal.update;
-export const destoryAll = portalModal.destroyAll;
+export const destroyAll = portalModal.destroyAll;
 export const destroy = portalModal.destroy;
 export const PortalModal = portalModal.Component;
 

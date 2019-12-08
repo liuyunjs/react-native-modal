@@ -5086,10 +5086,10 @@ react-native-animatable@^1.3.3:
   dependencies:
     prop-types "^15.7.2"
 
-react-native-portal-view@^0.0.11:
-  version "0.0.11"
-  resolved "https://registry.npmjs.org/react-native-portal-view/-/react-native-portal-view-0.0.11.tgz#2e90ad4a7cadd821532c1eaf7c8abb4b6731a0d8"
-  integrity sha512-yjKJyQfo1s37AUHmtozr5PboXdRli2tM3uDfhzSb9Zfg7q6jWzNIoZVJzebj9jEyCOplyRW4fXsQMDcZnnoJxA==
+react-native-portal-view@^0.0.20:
+  version "0.0.20"
+  resolved "https://registry.npmjs.org/react-native-portal-view/-/react-native-portal-view-0.0.20.tgz#de815b44a8f3b59bf714bb4d7646bc1cf8d47141"
+  integrity sha512-DSNa9HcnHMPEPkb5OmTVsMflY7qE9b8065Sf40gQf2G0gw9wuOrdV1RhQ0xhidnk8fQNqMNLIGmv+6V+Bte1xg==
   dependencies:
     hoist-non-react-statics "^3.3.1"
     react-native-root-siblings "^4.0.4"

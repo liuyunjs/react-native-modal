@@ -14,55 +14,57 @@ export type VerticalLayout = 'center' | 'top' | 'bottom';
 
 export interface LocalModalProps {
   // 模态框显示隐藏
-  visible: boolean,
+  visible?: boolean;
   // 模态框状态已经改变
-  onChange?: (visible: boolean) => any,
+  onChange?: (visible: boolean) => any;
   // 模态框状态将要改变
-  onWillChange?: (visible: boolean) => any,
+  onWillChange?: (visible: boolean) => any;
   // 进场动画
-  animationIn?: Animation | CustomAnimation,
+  animationIn?: Animation | CustomAnimation;
   // 出场动画
-  animationOut?: Animation | CustomAnimation,
+  animationOut?: Animation | CustomAnimation;
   // 进场动画时间
-  animationInTiming?: number,
+  animationInTiming?: number;
   // 出场动画时间
-  animationOutTiming?: number,
+  animationOutTiming?: number;
   // 遮罩进场动画时间
-  maskAnimationInTiming?: number,
+  maskAnimationInTiming?: number;
   // 遮罩出场动画时间
-  maskAnimationOutTiming?: number,
+  maskAnimationOutTiming?: number;
   // 是否渲染遮罩
-  mask?: boolean,
+  mask?: boolean;
   // 遮罩是否可点击关闭
-  maskCloseable?: boolean,
+  maskCloseable?: boolean;
   // 遮罩背景
-  maskBackgroundColor?: string,
-  style?: ViewStyle,
+  maskBackgroundColor?: string;
+  style?: ViewStyle;
   // 是否使用原生动画
-  useNativeDriver?: boolean,
+  useNativeDriver?: boolean;
   // 设备宽度
-  deviceWidth?: number,
+  deviceWidth?: number;
   // 设备高度
-  deviceHeight?: number,
+  deviceHeight?: number;
   // 是否响应键盘弹出收起时，自动推动内容位置
-  avoidKeyboard?: boolean,
+  avoidKeyboard?: boolean;
   // 垂直方向内容位置 上 中 下
-  verticalLayout?: VerticalLayout,
+  verticalLayout?: VerticalLayout;
   // 水平方向内容位置 左中右
-  horizontalLayout?: HorizontalLayout,
+  horizontalLayout?: HorizontalLayout;
   // 在模态框将要关闭的时候收起键盘
-  keyboardDismissWillHide?: boolean,
+  keyboardDismissWillHide?: boolean;
   // 模态框关闭之后销毁模态框中的内容
-  ifHideDestroy?: boolean,
+  ifHideDestroy?: boolean;
 }
 
 export interface LocalModalState {
-  visible?: boolean,
-  visibleProps?: boolean,
-  mount?: boolean,
+  visible?: boolean;
+  visibleProps?: boolean;
+  mount?: boolean;
 }
 
 export interface ModalProps extends LocalModalProps {
   // 是否全屏
-  fullScreen?: boolean,
+  fullScreen?: boolean;
+  id?: string;
+  prefix?: string;
 }

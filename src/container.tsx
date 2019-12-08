@@ -10,16 +10,23 @@ import {PortalModal} from './portal';
 import {LocalModal} from './local';
 import {ModalProps} from './types';
 
-export const Modal: React.FC<ModalProps> = (props: ModalProps) => {
-  const {fullScreen} = props;
+export const Modal: React.FC<ModalProps> = React.forwardRef(
+  (props: ModalProps, ref) => {
+    const {fullScreen} = props;
 
-  if (!fullScreen) {
-    return React.createElement(LocalModal, props);
-  }
+    if (!fullScreen) {
+      return React.createElement(LocalModal, {
+        ...props,
+        ref,
+      } as ModalProps);
+    }
 
-  return React.createElement(PortalModal, props);
-};
-
+    return React.createElement(PortalModal, {
+      ...props,
+      ref,
+    } as ModalProps);
+  },
+);
 
 Modal.defaultProps = {
   visible: true,
