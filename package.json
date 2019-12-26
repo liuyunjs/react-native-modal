@@ -1,9 +1,9 @@
 {
   "name": "react-native-smart-modal",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "private": false,
-  "main": "./lib/modal.js",
-  "types": "./types/index.d.ts",
+  "main": "./lib/index.js",
+  "types": "./lib/src/index.d.ts",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "react-native-animatable": "^1.3.3",
-    "react-native-portal-view": "^0.0.20",
-    "tslib": "^1.10.0"
+    "react-native-modal": "^11.5.3",
+    "react-native-portal-view": "^0.0.21"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

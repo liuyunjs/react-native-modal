@@ -68,3 +68,8 @@ lib
 dist
 types
 
+example/src/index.ts
+example/src/portal.ts
+example/src/utils.ts
+example/src/view.tsx
+example/src/modal.tsx

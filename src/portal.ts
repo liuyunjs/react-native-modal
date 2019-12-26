@@ -5,15 +5,6 @@
  * @version 0.0.1
  **/
 
-import {createPortal} from 'react-native-portal-view';
-import {LocalModal} from './local';
+import { createPortal } from 'react-native-portal-view';
 
-const portalModal = createPortal(LocalModal);
-
-export const show = portalModal.show;
-export const hide = portalModal.hide;
-export const update = portalModal.update;
-export const destroyAll = portalModal.destroyAll;
-export const destroy = portalModal.destroy;
-export const PortalModal = portalModal.Component;
-
+export default createPortal();
