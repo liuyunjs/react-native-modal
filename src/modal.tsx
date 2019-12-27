@@ -1,24 +1,33 @@
 import * as React from 'react';
-import portal from './portal';
-import ModalView, { ModalViewProps } from './view';
-
-const { Portal } = portal;
+import {createPortal} from 'react-native-portal-view';
+import ModalView, {ModalViewProps} from './view';
 
 type ModalProps = ModalViewProps & {
   fullScreen?: boolean;
 };
 
-const Modal: React.FC<ModalProps> = (props: ModalProps) => {
-  const modal = React.createElement(ModalView as React.ComponentClass<ModalViewProps>, props);
-  if (!props.fullScreen) {
-    return modal;
-  }
+export default function() {
+  const portal = createPortal();
+  const {Portal} = portal;
 
-  return <Portal>{modal}</Portal>;
-};
+  const Modal: React.FC<ModalProps> = (props: ModalProps) => {
+    const modal = React.createElement(
+      ModalView as React.ComponentClass<ModalViewProps>,
+      props,
+    );
+    if (!props.fullScreen) {
+      return modal;
+    }
 
-Modal.defaultProps = {
-  fullScreen: true,
-};
+    return <Portal>{modal}</Portal>;
+  };
 
-export default React.memo(Modal);
+  Modal.defaultProps = {
+    fullScreen: true,
+  };
+
+  return {
+    Modal: React.memo(Modal),
+    portal,
+  };
+}

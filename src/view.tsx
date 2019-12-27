@@ -6,7 +6,14 @@
  **/
 
 import * as React from 'react';
-import { Keyboard, KeyboardAvoidingView, View, StyleSheet, ViewStyle } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  View,
+  StyleSheet,
+  ViewStyle,
+  Platform,
+} from 'react-native';
 import Modal from 'react-native-modal';
 import { Animation, CustomAnimation } from 'react-native-animatable';
 import { getLayout } from './utils';
@@ -46,9 +53,9 @@ export type ModalViewProps = {
   // 是否使用原生动画
   useNativeDriver?: boolean;
   // 设备宽度
-  deviceWidth?: number;
-  // 设备高度
-  deviceHeight?: number;
+  // deviceWidth?: number;
+  // // 设备高度
+  // deviceHeight?: number;
   // 是否响应键盘弹出收起时，自动推动内容位置
   avoidKeyboard?: boolean;
   // 垂直方向内容位置 上 中 下
@@ -57,6 +64,8 @@ export type ModalViewProps = {
   horizontalLayout?: HorizontalLayout;
   // 在模态框将要关闭的时候收起键盘
   keyboardDismissWillHide?: boolean;
+
+  children?: React.ReactElement | React.ReactElement[];
 };
 
 type ModalViewState = {
@@ -83,8 +92,8 @@ export default class extends React.PureComponent<ModalViewProps, ModalViewState>
   };
 
   private keyboardShow: boolean = false;
-  private keyboardWillHideListener: any;
-  private keyboardWillShowListener: any;
+  private keyboardHideListener: any;
+  private keyboardShowListener: any;
 
   state: ModalViewState = {};
 
@@ -128,13 +137,19 @@ export default class extends React.PureComponent<ModalViewProps, ModalViewState>
    * 绑定键盘 收起/弹出 事件
    */
   private addKeyboardListener() {
-    this.keyboardWillHideListener = Keyboard.addListener(
-      'keyboardWillHide',
-      this.onKeyboardWillHide,
+    this.keyboardHideListener = Keyboard.addListener(
+      Platform.select({
+        ios: 'keyboardWillHide',
+        android: 'keyboardDidHide',
+      }),
+      this.onKeyboardHideListener,
     );
-    this.keyboardWillShowListener = Keyboard.addListener(
-      'keyboardWillShow',
-      this.onKeyboardWillShow,
+    this.keyboardShowListener = Keyboard.addListener(
+      Platform.select({
+        ios: 'keyboardWillShow',
+        android: 'keyboardDidShow',
+      }),
+      this.onKeyboardShowListener,
     );
   }
 
@@ -142,23 +157,23 @@ export default class extends React.PureComponent<ModalViewProps, ModalViewState>
    * 移除键盘 收起/弹出 事件
    */
   private removeKeyboardListener() {
-    this.keyboardWillShowListener && this.keyboardWillShowListener.remove();
-    this.keyboardWillHideListener && this.keyboardWillHideListener.remove();
-    this.keyboardWillShowListener = undefined;
-    this.keyboardWillHideListener = undefined;
+    this.keyboardShowListener && this.keyboardShowListener.remove();
+    this.keyboardHideListener && this.keyboardHideListener.remove();
+    this.keyboardShowListener = undefined;
+    this.keyboardHideListener = undefined;
   }
 
   /**
    * 标识键盘状态为收起
    */
-  private onKeyboardWillHide = () => {
+  private onKeyboardHideListener = () => {
     this.keyboardShow = false;
   };
 
   /**
    * 标识键盘状态为弹出
    */
-  private onKeyboardWillShow = () => {
+  private onKeyboardShowListener = () => {
     this.keyboardShow = true;
   };
 
@@ -210,6 +225,7 @@ export default class extends React.PureComponent<ModalViewProps, ModalViewState>
 
     const content = (
       <View
+        pointerEvents="box-none"
         style={[
           styles.container,
           {
@@ -242,7 +258,9 @@ export default class extends React.PureComponent<ModalViewProps, ModalViewState>
         onModalWillShow={this.onWillShow}
       >
         {avoidKeyboard ? (
-          <KeyboardAvoidingView style={styles.container}>{content}</KeyboardAvoidingView>
+          <KeyboardAvoidingView pointerEvents="box-none" style={styles.container}>
+            {content}
+          </KeyboardAvoidingView>
         ) : (
           content
         )}
