@@ -33,7 +33,7 @@ const deps = Object.keys(pkg.dependencies || {});
 const peerDeps = Object.keys(pkg.peerDependencies || {});
 
 const config = {
-  input: 'index.ts',
+  input: 'src/index.ts',
   external: makeExternalPredicate(deps.concat(peerDeps)),
 };
 

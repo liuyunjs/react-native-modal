@@ -1,6 +1,6 @@
 import { PortalProvider } from 'react-native-portal-view';
-import createModal from './src/modal';
-import ModalView from './src/view';
+import createModal from './modal';
+import ModalView from './view';
 
 const { portal, Modal } = createModal();
 
