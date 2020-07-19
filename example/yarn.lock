@@ -2903,13 +2903,6 @@ hermes-engine@^0.2.1:
   resolved "https://registry.npmjs.org/hermes-engine/-/hermes-engine-0.2.1.tgz#25c0f1ff852512a92cb5c5cc47cf967e1e722ea2"
   integrity sha512-eNHUQHuadDMJARpaqvlCZoK/Nitpj6oywq3vQ3wCwEsww5morX34mW5PmKWQTO7aU0ck0hgulxR+EVDlXygGxQ==
 
-hoist-non-react-statics@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#101685d3aff3b23ea213163f6e8e12f4f111e19f"
-  integrity sha512-wbg3bpgA/ZqWrZuMOeJi8+SKMhr7X9TesL/rXMjTzh0p0JUBo3II8DHboYbuIXWRlttrUFxwcu/5kygrCw8fJw==
-  dependencies:
-    react-is "^16.7.0"
-
 hosted-git-info@^2.1.4:
   version "2.8.5"
   resolved "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.8.5.tgz#759cfcf2c4d156ade59b0b2dfabddc42a6b9c70c"
@@ -3927,9 +3920,9 @@ lodash.unescape@4.0.1:
   integrity sha1-vyJJiGzlFM2hEvrpIYzcBlIR/Jw=
 
 lodash@^4.17.10, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.5, lodash@^4.3.0:
-  version "4.17.15"
-  resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 log-symbols@^2.2.0:
   version "2.2.0"
@@ -5085,7 +5078,7 @@ react-fast-compare@^2.0.4:
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
-react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
+react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
   version "16.12.0"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
@@ -5105,38 +5098,22 @@ react-native-modal@^11.5.3:
     prop-types "^15.6.2"
     react-native-animatable "1.3.3"
 
-react-native-portal-view@^0.0.20:
-  version "0.0.20"
-  resolved "https://registry.npmjs.org/react-native-portal-view/-/react-native-portal-view-0.0.20.tgz#de815b44a8f3b59bf714bb4d7646bc1cf8d47141"
-  integrity sha512-DSNa9HcnHMPEPkb5OmTVsMflY7qE9b8065Sf40gQf2G0gw9wuOrdV1RhQ0xhidnk8fQNqMNLIGmv+6V+Bte1xg==
-  dependencies:
-    hoist-non-react-statics "^3.3.1"
-    react-native-root-siblings "^4.0.4"
-    tslib "^1.10.0"
-
-react-native-portal-view@^0.0.23:
-  version "0.0.23"
-  resolved "https://registry.npmjs.org/react-native-portal-view/-/react-native-portal-view-0.0.23.tgz#9b74f89e5dd7e30c2a3fadaff5f52e85e53b2d29"
-  integrity sha512-dDIKQobCQcd2oQLuwF9kaf3+EVlYtwrRtfh7sXKA/wGux60xzrbvQ0Uud/UKvxizdEjXP+YXFXB5lyZJPCOeiQ==
+react-native-portal-view@^0.0.24:
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/react-native-portal-view/-/react-native-portal-view-0.0.24.tgz#7943880c57f1a46c1663f649943ac22342aee74f"
+  integrity sha512-b9AK7nKSKXd4yezr0czttjHkoFdk3lxkM5OY1fR4wyvhR9DApZ5eINU16agF2U24mrRz9Vve0Wzd0lzXSROiNg==
   dependencies:
     invariant "^2.2.4"
     react-use "^13.12.2"
 
-react-native-root-siblings@^4.0.4:
-  version "4.0.4"
-  resolved "https://registry.npmjs.org/react-native-root-siblings/-/react-native-root-siblings-4.0.4.tgz#c8aa3cda791e472d7c53ab4dff0e96ebc9c90c69"
-  integrity sha512-CroI+VMZZFVSCaQWIDfRYC9MuChfbCRARb139fgjsjU5dw90CSStTRQKYkTdtKdI8v73IdruWBCcwKacgj088w==
-  dependencies:
-    static-container "^1.5.1"
-
-react-native-smart-modal@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.npmjs.org/react-native-smart-modal/-/react-native-smart-modal-0.0.9.tgz#95f5a20831dda3447a26b83357b1bf22a886eb61"
-  integrity sha512-ab6plm2PF04sPy/hfMw2gygGkL8BfNLCGprw2Hr0Y5OeqOVzhVb7DO53e4NUpRm9l1MrkFnEfaJaLN7HNZ03AA==
+react-native-smart-modal@^0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/react-native-smart-modal/-/react-native-smart-modal-0.0.11.tgz#a371ba93fed9ae1cdff1f41a2b5c5d57847b7ab4"
+  integrity sha512-i63+fub6olXmCy5mDL+U+xMawRQ4ykeatb9A/o8WiwA8waJvn0+dyhBI3wNUejWGd1GMqdSbaO5BpGfqrATaGw==
   dependencies:
     react-native-animatable "^1.3.3"
-    react-native-portal-view "^0.0.20"
-    tslib "^1.10.0"
+    react-native-modal "^11.5.3"
+    react-native-portal-view "^0.0.24"
 
 react-native@0.61.4:
   version "0.61.4"
@@ -5873,11 +5850,6 @@ stacktrace-parser@^0.1.3:
   integrity sha512-Evm+NuZ2ZTwGazsbsZC+EV1EGsvyxgIvtNwbyFfeXaq/8L78M5Kdh0qpmQaTkUpbOAKbbPP7c7qZa7u8XFsrUA==
   dependencies:
     type-fest "^0.7.1"
-
-static-container@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.npmjs.org/static-container/-/static-container-1.5.1.tgz#9d7a94e04dea864539a7b6a1304843ada740dc19"
-  integrity sha512-OFChfLKIvSzaMA3otS5CEabJTIzHFPhMxogIT+io4F207PXTvS6woFyjXIyXyqMIYAhryePGeFZYC6uLcG1lpA==
 
 static-extend@^0.1.1:
   version "0.1.2"
