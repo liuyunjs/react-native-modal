@@ -28,7 +28,7 @@ yarn add react-native-smart-modal
 | visible                 |           true           |                                     boolean                                     | 模态框显示隐藏                                               |
 | onChange                |            -             |                           (visible: boolean) => void                            | 模态框状态已经改变时调用的回调                               |
 | onWillChange            |            -             |                           (visible: boolean) => void                            | 模态框状态将要改变时调用的回调                               |
-| animation               | _animations.slideInDown_ | {from: rmotion['from'], animate: rmotion['animate'], exit?: rmotion['animate']} | 进场动画                                                     |
+| animation               | _animations.slideDown_ | {from: rmotion['from'], animate: rmotion['animate'], exit?: rmotion['animate']} | 进场动画                                                     |
 | animationConf           |           _-_            |                                rmotion['config']                                | 出场动画                                                     |
 | mask                    |          _true_          |                                     boolean                                     | 是否渲染遮罩                                                 |
 | maskCloseable           |          _true_          |                                     boolean                                     | 遮罩是否可点击关闭                                           |
