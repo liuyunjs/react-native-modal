@@ -7,21 +7,23 @@
     "jsx": "react",
     "lib": ["es6"],
     "moduleResolution": "node",
-    "noEmit": true,
+    "noEmit": false,
     "strict": true,
     "target": "esnext",
     "resolveJsonModule": true,
     "declaration": true,
-    "rootDir": "./",
-    "outDir": "lib"
+//    "rootDir": "./",
+    "outDir": "lib",
+    "skipLibCheck": true,
+    "module": "esnext"
   },
+  "include": ["src"],
   "exclude": [
     "node_modules",
     "babel.config.js",
     "metro.config.js",
     "jest.config.js",
     "lib/*",
-    "rollup.config.js",
     "example/*"
   ]
 }

@@ -3,10 +3,10 @@
  * @Create on : 2019/11/18 22:22
  * @author liuyunjs
  * @version 0.0.1
- * @Update on : 2019/12/17 23:56
+ * @Update on : 2021/07/03 09:56
  **/
 
-import { HorizontalLayout, VerticalLayout } from './view';
+import { HorizontalLayout, VerticalLayout } from './types';
 
 /**
  * 解析模态框中的内容的位置设置成所对应的样式

@@ -1,11 +1,7 @@
-import { PortalProvider } from 'react-native-portal-view';
-import createModal from './modal';
-import ModalView from './view';
+import { Modal } from './Modal';
+import * as animations from './animations';
 
-const { portal, Modal } = createModal();
-
-const ModalProvider = PortalProvider;
-
-export { Modal, ModalView, ModalProvider, createModal, portal };
-
+export * from './types';
+export * from './Modal';
 export default Modal;
+export { animations };
