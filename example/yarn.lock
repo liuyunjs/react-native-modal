@@ -5255,10 +5255,10 @@ react-native-portal-view@^0.0.24:
     invariant "^2.2.4"
     react-use "^13.12.2"
 
-react-native-portal-view@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-portal-view/-/react-native-portal-view-1.0.0.tgz#2a2ce5833ea25386ebf690d9ff99c5ca81da9770"
-  integrity sha512-Ru2gHa8LOynkhPWV7wupMDmlASzqCFoKgqkQkUpfoWBwTyCsxofOxr3WqCNfpl/VOfq7Ug5nyCDtG7dduRlDhA==
+react-native-portal-view@^1.0.1-beta1:
+  version "1.0.1-beta1"
+  resolved "https://registry.yarnpkg.com/react-native-portal-view/-/react-native-portal-view-1.0.1-beta1.tgz#6454e11c281e1d9f02fb493d25bc707b983c06d8"
+  integrity sha512-29gte55/oBGbYzZ0IG9N+9aA94flNIr1vnGh+qgsylhb+ga0P+WS4uUFgDFw6Bl3QVglNNETE2O8ZGIxCzauFA==
 
 react-native-reanimated@1.13.3:
   version "1.13.3"
@@ -5607,10 +5607,10 @@ rimraf@~2.2.6:
   resolved "https://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
 
-rmotion@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/rmotion/-/rmotion-0.0.2.tgz#98ee206fdcb8743e0729c33941cf3232e84c84de"
-  integrity sha512-mUPrcREIHeTIPtcqwCXt5v8WoX99vHjUfiepoAofW34v8/YDM4kywOzrtuePp/E7i/G9+Deo9dUwl0qtdkbQnA==
+rmotion@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/rmotion/-/rmotion-0.0.4.tgz#61d8643687b51dbb39cdaad8ef3089aa7cf2c492"
+  integrity sha512-X0rAHlEmSD5mKU3KSIg6HDpSSk9JJCjtOwjJdnz7D1+ILfnIDRYwCaZBdeHEBhGtgTR6mYL3M4cVDy+jh2Z9ew==
   dependencies:
     "@liuyunjs/hooks" "^1.1.0-beta1"
     "@liuyunjs/utils" "^1.0.0"

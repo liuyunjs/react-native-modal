@@ -35,7 +35,7 @@ export type ModalBaseWithOverlayProps = {
   animationConf?: AnimationProps['config'];
   // 在模态框将要关闭的时候收起键盘
   keyboardDismissWillHide?: boolean;
-  backHandlerReaction?: boolean;
+  // backHandlerReaction?: boolean;
 
   backHandlerType?: 'disabled' | 'reaction' | 'none';
 };

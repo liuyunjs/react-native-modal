@@ -42,5 +42,5 @@ export const Modal: React.FC<ModalProps> = ({
 
   if (!fullScreen) return elem;
 
-  return <Portal fabric={fabric}>{elem}</Portal>;
+  return <Portal>{elem}</Portal>;
 };
