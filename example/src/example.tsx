@@ -12,10 +12,10 @@ export default function App(props: any) {
 
   const { visible, visible2 } = getState();
 
-  console.log(visible);
+  console.log(visible, visible2);
 
   return (
-    <>
+    <View style={{ height: 400, overflow: 'hidden' }}>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text
           onPress={() => {
@@ -45,6 +45,6 @@ export default function App(props: any) {
           onPress={() => setState({ visible2: !visible2 })}
         />
       </Modal>
-    </>
+    </View>
   );
 }

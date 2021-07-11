@@ -6,10 +6,22 @@ export type VerticalLayout = 'center' | 'top' | 'bottom';
 
 export type HorizontalLayout = 'center' | 'left' | 'right';
 
+export type ModalifyProps = {
+  // 模态框显示隐藏
+  visible?: boolean;
+  // 模态框状态已经改变
+  onChange?: (visible: boolean) => void;
+  // 模态框状态将要改变
+  onWillChange?: (visible: boolean) => void;
+
+  fullScreen?: boolean;
+};
+
 export type ModalBaseWithOverlayProps = {
   onRequestClose: () => void;
   onDidAnimate?: (exit: boolean) => void;
   onWillAnimate?: (exit: boolean) => void;
+  zIndex?: number;
 
   // 是否渲染遮罩
   mask?: boolean;
@@ -43,14 +55,5 @@ export type ModalBaseWithOverlayProps = {
 export type ModalProps = Omit<
   ModalBaseWithOverlayProps,
   'onDidAnimate' | 'onRequestClose' | 'onWillAnimate'
-> & {
-  fabric?: boolean;
-  // 模态框显示隐藏
-  visible?: boolean;
-  // 模态框状态已经改变
-  onChange?: (visible: boolean) => void;
-  // 模态框状态将要改变
-  onWillChange?: (visible: boolean) => void;
-
-  fullScreen?: boolean;
-};
+> &
+  ModalifyProps;
