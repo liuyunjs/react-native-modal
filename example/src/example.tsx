@@ -26,6 +26,7 @@ export default function App(props: any) {
         </Text>
       </View>
       <Modal
+        // fullScreen={false}
         key="0"
         onChange={(v) => setState({ visible: v })}
         visible={visible}
@@ -36,6 +37,7 @@ export default function App(props: any) {
         />
       </Modal>
       <Modal
+        // fullScreen={false}
         key="1"
         onChange={(v) => setState({ visible2: v })}
         visible={visible2}

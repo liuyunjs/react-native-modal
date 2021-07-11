@@ -21,7 +21,7 @@ export type ModalBaseWithOverlayProps = {
   onRequestClose: () => void;
   onDidAnimate?: (exit: boolean) => void;
   onWillAnimate?: (exit: boolean) => void;
-  zIndex?: number;
+  z?: number;
 
   // 是否渲染遮罩
   mask?: boolean;

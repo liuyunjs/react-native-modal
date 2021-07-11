@@ -4,29 +4,12 @@ import { Portal } from 'react-native-portal-view/lib/Portal';
 import { useReactCallback } from '@liuyunjs/hooks/lib/useReactCallback';
 import { useReactionState } from '@liuyunjs/hooks/lib/useReactionState';
 import { useConst } from '@liuyunjs/hooks/lib/useConst';
-import { useWillMount } from '@liuyunjs/hooks/lib/useWillMount';
+import { modalZIndex } from './modalZIndex';
 import { ModalifyProps } from './types';
 
-let modalIndex = 0,
-  zIndex = 1;
-export const useIndexManager = () => {
-  React.useEffect(
-    () => () => {
-      modalIndex--;
-      if (modalIndex <= 0) {
-        zIndex = 1;
-      }
-    },
-    [],
-  );
-
-  return useWillMount(() => {
-    modalIndex++;
-    return zIndex++;
-  });
-};
-
-export const modalify = <T extends any>(Component: React.ComponentType<T>) => {
+export const modalify = <T extends { z?: number }>(
+  Component: React.ComponentType<T>,
+) => {
   function Modal({
     visible: visibleInput,
     onChange,
@@ -34,7 +17,7 @@ export const modalify = <T extends any>(Component: React.ComponentType<T>) => {
     fullScreen = true,
     ...rest
   }: ModalifyProps &
-    Omit<T, 'onWillAnimate' | 'onDidAnimate' | 'onRequestClose' | 'zIndex'>) {
+    Omit<T, 'onWillAnimate' | 'onDidAnimate' | 'onRequestClose'>) {
     const [visible, setVisible] = useReactionState(!!visibleInput);
 
     const onDidAnimate = useReactCallback((exit: boolean) => {
@@ -47,15 +30,12 @@ export const modalify = <T extends any>(Component: React.ComponentType<T>) => {
 
     const onRequestClose = useConst(() => setVisible(false));
 
-    const zIndex = useIndexManager();
-
     const elem = (
       <AnimatePresence>
         {visible && (
           // @ts-ignore
           <Component
             {...rest}
-            zIndex={zIndex}
             onDidAnimate={onDidAnimate}
             onRequestClose={onRequestClose}
             onWillAnimate={onWillAnimate}
@@ -73,5 +53,5 @@ export const modalify = <T extends any>(Component: React.ComponentType<T>) => {
     Component.displayName || Component.name || 'Component'
   })`;
 
-  return Modal;
+  return modalZIndex(Modal);
 };

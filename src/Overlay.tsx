@@ -20,6 +20,7 @@ export const Overlay: React.FC<OverlayProps> = ({
   return (
     <TouchableWithoutFeedback disabled={disabled} onPress={onPress}>
       <RMotionView
+        config={config}
         from={fade.from}
         animate={fade.animate}
         exit={fade.from}

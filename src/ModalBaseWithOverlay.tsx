@@ -73,7 +73,7 @@ export const ModalBaseWithOverlay: React.FC<ModalBaseWithOverlayProps> = ({
   onDidAnimate,
   keyboardDismissWillHide,
   backHandlerType,
-  zIndex = 1,
+  z = 1,
 }) => {
   const isShowRef = useKeyboardShowRef(!!keyboardDismissWillHide);
 
@@ -113,7 +113,7 @@ export const ModalBaseWithOverlay: React.FC<ModalBaseWithOverlayProps> = ({
   );
 
   return (
-    <View style={[styles.root, { zIndex }]} pointerEvents="box-none">
+    <View style={[styles.root, { zIndex: z }]} pointerEvents="box-none">
       {mask && (
         <Overlay
           config={animationConf}
