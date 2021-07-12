@@ -1,6 +1,7 @@
 import { StyleProp, ViewStyle } from 'react-native';
 import { AnimationProps, AnimationPresupposition } from 'rmotion';
-import * as React from 'react';
+import React from 'react';
+import { Portal } from 'react-native-portal-view';
 
 export type VerticalLayout = 'center' | 'top' | 'bottom';
 

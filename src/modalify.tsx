@@ -1,22 +1,24 @@
 import React from 'react';
 import { AnimatePresence } from 'rmotion';
-import { Portal } from 'react-native-portal-view/lib/Portal';
+import { Portal, PortalProps } from 'react-native-portal-view/lib/Portal';
 import { useReactCallback } from '@liuyunjs/hooks/lib/useReactCallback';
 import { useReactionState } from '@liuyunjs/hooks/lib/useReactionState';
 import { useConst } from '@liuyunjs/hooks/lib/useConst';
 import { modalZIndex } from './modalZIndex';
 import { ModalifyProps } from './types';
 
-export const modalify = <T extends { z?: number }>(
-  Component: React.ComponentType<T>,
-) => {
+export const modalify = <T extends any>(Component: React.ComponentType<T>) => {
   function Modal({
     visible: visibleInput,
     onChange,
     onWillChange,
     fullScreen = true,
+    legacy,
+    namespace,
+    override,
     ...rest
   }: ModalifyProps &
+    PortalProps &
     Omit<T, 'onWillAnimate' | 'onDidAnimate' | 'onRequestClose'>) {
     const [visible, setVisible] = useReactionState(!!visibleInput);
 
@@ -46,7 +48,12 @@ export const modalify = <T extends { z?: number }>(
 
     if (!fullScreen) return elem;
 
-    return <Portal>{elem}</Portal>;
+    return (
+      // @ts-ignore
+      <Portal legacy={legacy} namespace={namespace} override={override}>
+        {elem}
+      </Portal>
+    );
   }
 
   Modal.displayName = `modalify(${
