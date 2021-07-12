@@ -14,7 +14,9 @@ export const modalify = <T extends any>(Component: React.ComponentType<T>) => {
     onWillChange,
     fullScreen = true,
     legacy,
+    // @ts-ignore
     namespace,
+    // @ts-ignore
     override,
     ...rest
   }: ModalifyProps &
