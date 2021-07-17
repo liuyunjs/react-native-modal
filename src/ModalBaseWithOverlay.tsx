@@ -43,13 +43,13 @@ const useBackHandler = ({
   onRequestClose,
   backHandlerType,
 }: {
-  onRequestClose: () => void;
+  onRequestClose?: () => void;
   backHandlerType?: ModalBaseWithOverlayProps['backHandlerType'];
 }) => {
   React.useEffect(() => {
     if (backHandlerType && backHandlerType !== 'none') {
       const handler = BackHandler.addEventListener('hardwareBackPress', () => {
-        if (backHandlerType === 'reaction') onRequestClose();
+        if (backHandlerType === 'reaction') onRequestClose?.();
         return true;
       });
       return () => handler.remove();

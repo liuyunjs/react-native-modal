@@ -19,7 +19,7 @@ export type ModalifyProps = {
 };
 
 export type ModalBaseWithOverlayProps = {
-  onRequestClose: () => void;
+  onRequestClose?: () => void;
   onDidAnimate?: (exit: boolean) => void;
   onWillAnimate?: (exit: boolean) => void;
   z?: number;
