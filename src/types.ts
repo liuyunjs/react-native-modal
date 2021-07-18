@@ -30,6 +30,8 @@ export type ModalBaseWithOverlayProps = {
   maskCloseable?: boolean;
   // 遮罩背景
   maskBackgroundColor?: string;
+
+  darkMaskBackgroundColor?: string;
   // 遮罩透明度
   // maskOpacity?: number;
   style?: StyleProp<ViewStyle>;
@@ -51,10 +53,12 @@ export type ModalBaseWithOverlayProps = {
   // backHandlerReaction?: boolean;
 
   backHandlerType?: 'disabled' | 'reaction' | 'none';
+
+  forceDark?: boolean;
 };
 
-export type ModalProps = Omit<
-  ModalBaseWithOverlayProps,
-  'onDidAnimate' | 'onRequestClose' | 'onWillAnimate'
-> &
-  ModalifyProps;
+// export type ModalProps = Omit<
+//   ModalBaseWithOverlayProps,
+//   'onDidAnimate' | 'onRequestClose' | 'onWillAnimate'
+// > &
+//   ModalifyProps;

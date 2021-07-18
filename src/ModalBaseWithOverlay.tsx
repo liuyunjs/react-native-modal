@@ -7,7 +7,7 @@ import {
   BackHandler,
 } from 'react-native';
 import { RMotionView } from 'rmotion';
-import { Overlay } from './Overlay';
+import { Mask } from 'rn-mask';
 import { getLayout } from './utils';
 import { slideDown } from './animations';
 import { ModalBaseWithOverlayProps } from './types';
@@ -74,6 +74,8 @@ export const ModalBaseWithOverlay: React.FC<ModalBaseWithOverlayProps> = ({
   keyboardDismissWillHide,
   backHandlerType,
   z = 1,
+  forceDark,
+  darkMaskBackgroundColor,
 }) => {
   const isShowRef = useKeyboardShowRef(!!keyboardDismissWillHide);
 
@@ -115,7 +117,9 @@ export const ModalBaseWithOverlay: React.FC<ModalBaseWithOverlayProps> = ({
   return (
     <View style={[styles.root, { zIndex: z }]} pointerEvents="box-none">
       {mask && (
-        <Overlay
+        <Mask
+          darkTintColor={darkMaskBackgroundColor}
+          forceDark={forceDark}
           config={animationConf}
           tintColor={maskBackgroundColor}
           onPress={onRequestClose}

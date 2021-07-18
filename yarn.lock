@@ -5539,6 +5539,13 @@ rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.3:
   dependencies:
     glob "^7.1.3"
 
+rimraf@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-3.0.2.tgz#f1a5402ba6220ad52cc1282bac1ae3aa49fd061a"
+  integrity sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
+  dependencies:
+    glob "^7.1.3"
+
 rimraf@~2.2.6:
   version "2.2.8"
   resolved "https://registry.npm.taobao.org/rimraf/download/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
@@ -5553,6 +5560,22 @@ rmotion@^0.0.4:
     "@liuyunjs/utils" "^1.0.0"
     framer-motion "^4.1.17"
     hoist-non-react-statics "^3.3.2"
+
+rn-darkly@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/rn-darkly/-/rn-darkly-0.0.6.tgz#d1556a7aeec0000b5d515044c3dbff0fc7d2ec6f"
+  integrity sha512-33j1viMvA1xklv4hYf4ap2/bZX0FejCyusMY0eS8w8Rp+3dX4Z3rRt5MWvrNjcYonA4WyrVQMLJ6dXUsEJ14EQ==
+  dependencies:
+    "@types/hoist-non-react-statics" "^3.3.1"
+    hoist-non-react-statics "^3.3.2"
+
+rn-mask@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/rn-mask/-/rn-mask-0.0.1.tgz#34913a66a180be66b6d3982868628866d4823d00"
+  integrity sha512-NKRmU84YDZrX2R149sgt/Fv7ZZUpy5e8xbB0aOxniuKp6b5DXpIUlCx7iX6kU5phLC9VfFxnNwyyQIhrd5e5+w==
+  dependencies:
+    rmotion "^0.0.4"
+    rn-darkly "^0.0.6"
 
 rsvp@^4.8.4:
   version "4.8.5"

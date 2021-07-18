@@ -7,7 +7,7 @@ import { useConst } from '@liuyunjs/hooks/lib/useConst';
 import { modalZIndex } from './modalZIndex';
 import { ModalifyProps } from './types';
 
-export const modalify = <T extends any>(Component: React.ComponentType<T>) => {
+export const modality = <T extends any>(Component: React.ComponentType<T>) => {
   function Modal({
     visible: visibleInput,
     onChange,

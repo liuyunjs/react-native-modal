@@ -2,16 +2,16 @@ import React from 'react';
 import { AnimatePresence } from 'rmotion';
 import { PortalStore } from 'react-native-portal-view';
 import { ModalBaseWithOverlay } from './ModalBaseWithOverlay';
-import { modalify } from './modalify';
+import { modality } from './modality';
 import { modalZIndex } from './modalZIndex';
 import { ModalBaseWithOverlayProps } from './types';
 
 const IndexedModal = modalZIndex(ModalBaseWithOverlay);
 
-const ModalifyModal = modalify(ModalBaseWithOverlay);
+const ModalityModal = modality(ModalBaseWithOverlay);
 
 // @ts-ignore
-export const Modal: typeof ModalifyModal & {
+export const Modal: typeof ModalityModal & {
   add: (namespace: string, props: ModalBaseWithOverlayProps) => string;
   update: (
     namespace: string,
@@ -19,7 +19,7 @@ export const Modal: typeof ModalifyModal & {
     props: ModalBaseWithOverlayProps,
   ) => void;
   remove: (namespace: string, key: string) => void;
-} = ModalifyModal;
+} = ModalityModal;
 
 Modal.add = (namespace: string, props: ModalBaseWithOverlayProps) => {
   const updater = PortalStore.getUpdater(namespace);
