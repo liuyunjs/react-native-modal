@@ -5219,10 +5219,10 @@ react-native-modal@^11.5.3:
     prop-types "^15.6.2"
     react-native-animatable "1.3.3"
 
-react-native-portal-view@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-portal-view/-/react-native-portal-view-1.0.3.tgz#d731bbb86c5050b5b653185d6ad5793c419b32a7"
-  integrity sha512-DEUBmues1/gtdgly+Vi6C7wXYOamHN+KWDL3Erd4mPIf5lMSqJVmKEVsNC58Oxw6GoJP6lytDpmwproaPpoJmQ==
+react-native-portal-view@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-portal-view/-/react-native-portal-view-1.0.5.tgz#8690d8c05c46e3969fd78073b16a5f4317a848eb"
+  integrity sha512-iP05sV7RkdDoY6+Tpq67cc0QIDA4WNeNn2azn0z4VRyQTjDLf6Z0wJEhXwS/ioGbxXLkKATvSz+f+1oWir7FVw==
 
 react-native-reanimated@^2.2.0:
   version "2.2.0"

@@ -1,12 +1,12 @@
 import React from 'react';
-import { AnimatePresence } from 'rmotion';
 import { PortalStore } from 'react-native-portal-view';
 import { ModalBaseWithOverlay } from './ModalBaseWithOverlay';
 import { modality } from './modality';
-import { modalZIndex } from './modalZIndex';
+// import { modalZIndex } from './modalZIndex';
+import { ModalContainer } from './ModalContainer';
 import { ModalBaseWithOverlayProps } from './types';
 
-const IndexedModal = modalZIndex(ModalBaseWithOverlay);
+// const IndexedModal = modalZIndex(ModalBaseWithOverlay);
 
 const ModalityModal = modality(ModalBaseWithOverlay);
 
@@ -23,15 +23,18 @@ export const Modal: typeof ModalityModal & {
 
 Modal.add = (namespace: string, props: ModalBaseWithOverlayProps) => {
   const updater = PortalStore.getUpdater(namespace);
-  updater.setContainer(AnimatePresence);
-  return updater.add(<IndexedModal {...props} />);
+  updater.setContainer(<ModalContainer z={props.z} />);
+  return updater.add(<ModalBaseWithOverlay {...props} />);
 };
 Modal.update = (
   namespace: string,
   key: string,
   props: ModalBaseWithOverlayProps,
 ) => {
-  PortalStore.getUpdater(namespace).update(key, <IndexedModal {...props} />);
+  PortalStore.getUpdater(namespace).update(
+    key,
+    <ModalBaseWithOverlay {...props} />,
+  );
 };
 Modal.remove = (namespace: string, key: string) => {
   PortalStore.getUpdater(namespace).remove(key);

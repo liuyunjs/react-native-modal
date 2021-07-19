@@ -1,3 +1,4 @@
+import 'react-native-portal-view';
 import { Modal } from './Modal';
 import * as animations from './animations';
 

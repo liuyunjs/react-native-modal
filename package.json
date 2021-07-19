@@ -1,6 +1,6 @@
 {
   "name": "react-native-smart-modal",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "private": false,
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@liuyunjs/hooks": "^1.1.0-beta2",
-    "react-native-portal-view": "^1.0.3",
+    "react-native-portal-view": "^1.0.5",
     "rmotion": "^0.0.4",
     "rn-mask": "^0.0.1"
   },

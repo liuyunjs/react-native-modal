@@ -7,17 +7,41 @@ import { useConst } from '@liuyunjs/hooks/lib/useConst';
 import { modalZIndex } from './modalZIndex';
 import { ModalifyProps } from './types';
 
-export const modality = <T extends any>(Component: React.ComponentType<T>) => {
+export const modality = <T extends {}>(Component: React.ComponentType<T>) => {
+  function MaybeFullScreenModal({
+    fullScreen = true,
+    legacy,
+    namespace,
+    override,
+    ...rest
+  }: T & {
+    fullScreen?: boolean;
+    legacy?: boolean;
+    namespace?: string;
+    override: { current?: string };
+  }) {
+    // @ts-ignore
+    const elem = React.createElement(Component, rest as T);
+    if (!fullScreen) return elem;
+
+    return (
+      // @ts-ignore
+      <Portal legacy={legacy} namespace={namespace!} override={override}>
+        {elem}
+      </Portal>
+    );
+  }
+
   function Modal({
     visible: visibleInput,
     onChange,
     onWillChange,
-    fullScreen = true,
-    legacy,
-    // @ts-ignore
-    namespace,
-    // @ts-ignore
-    override,
+    // fullScreen = true,
+    // legacy,
+    // // @ts-ignore
+    // namespace,
+    // // @ts-ignore
+    // override,
     ...rest
   }: ModalifyProps &
     PortalProps &
@@ -34,12 +58,13 @@ export const modality = <T extends any>(Component: React.ComponentType<T>) => {
 
     const onRequestClose = useConst(() => setVisible(false));
 
-    const elem = (
+    return (
       <AnimatePresence>
         {visible && (
           // @ts-ignore
-          <Component
+          <MaybeFullScreenModal
             {...rest}
+            key="modal"
             onDidAnimate={onDidAnimate}
             onRequestClose={onRequestClose}
             onWillAnimate={onWillAnimate}
@@ -48,19 +73,19 @@ export const modality = <T extends any>(Component: React.ComponentType<T>) => {
       </AnimatePresence>
     );
 
-    if (!fullScreen) return elem;
-
-    return (
-      // @ts-ignore
-      <Portal legacy={legacy} namespace={namespace} override={override}>
-        {elem}
-      </Portal>
-    );
+    // if (!fullScreen) return elem;
+    //
+    // return (
+    //   // @ts-ignore
+    //   <Portal legacy={legacy} namespace={namespace} override={override}>
+    //     {elem}
+    //   </Portal>
+    // );
   }
 
-  Modal.displayName = `modalify(${
-    Component.displayName || Component.name || 'Component'
-  })`;
+  // Modal.displayName = `modalify(${
+  //   Component.displayName || Component.name || 'Component'
+  // })`;
 
   return modalZIndex(Modal);
 };
