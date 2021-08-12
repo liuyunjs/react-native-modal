@@ -11,13 +11,13 @@
 
 > npm
 
-```
+```shell
 npm i react-native-smart-modal -S
 ```
 
 > yarn
 
-```
+```shell
 yarn add react-native-smart-modal
 ```
 
