@@ -14,6 +14,7 @@ export const Modal: React.FC<ModalProps> = ({
   fullScreen = true,
   namespace,
   override,
+  store,
   ...rest
 }) => {
   const [visible, setVisible] = useReactionState<boolean | undefined>(
@@ -44,7 +45,7 @@ export const Modal: React.FC<ModalProps> = ({
   if (!fullScreen) return elem;
 
   return (
-    <LegacyPortal namespace={namespace} override={override}>
+    <LegacyPortal store={store} namespace={namespace} override={override}>
       {elem!}
     </LegacyPortal>
   );
