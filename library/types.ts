@@ -1,7 +1,7 @@
 import { StyleProp, ViewStyle } from 'react-native';
 import { AnimationProps, AnimationPresupposition } from 'rmotion';
 import React from 'react';
-import { LegacyPortalProps } from 'react-native-portal-view';
+import { PortalProps } from 'react-native-portal-view';
 import { PortalStore } from 'react-native-portal-view/dist/PortalStore';
 
 export type VerticalLayout = 'center' | 'top' | 'bottom';
@@ -59,7 +59,7 @@ export type ModalInternalProps = {
 };
 
 export type ModalProps = ModalityProps &
-  LegacyPortalProps &
+  PortalProps &
   Omit<
     ModalInternalProps,
     'onWillAnimate' | 'onDidAnimate' | 'onRequestClose'
