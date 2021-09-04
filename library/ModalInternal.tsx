@@ -76,6 +76,7 @@ const ModalInternal: React.FC<ModalInternalProps> = ({
   forceDark,
   darkMaskBackgroundColor,
   containerStyle,
+  contentContainerStyle,
 }) => {
   const isShowRef = useKeyboardShowRef(!!keyboardDismissWillHide);
 
@@ -121,7 +122,7 @@ const ModalInternal: React.FC<ModalInternalProps> = ({
       config={animationConf}
       onDidAnimate={onDidAnimate}
       pointerEvents="box-none"
-      style={[styles.container, containerStyle]}
+      style={[styles.container, contentContainerStyle]}
       exit={animation!.exit || animation!.from}
       from={animation!.from}
       animate={animation!.animate}>
@@ -136,7 +137,7 @@ const ModalInternal: React.FC<ModalInternalProps> = ({
   );
 
   return (
-    <View style={styles.root} pointerEvents="box-none">
+    <View style={[styles.root, containerStyle]} pointerEvents="box-none">
       {mask && (
         <Mask
           darkTintColor={darkMaskBackgroundColor}

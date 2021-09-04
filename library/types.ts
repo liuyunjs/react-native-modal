@@ -36,6 +36,7 @@ export type ModalInternalProps = {
   // maskOpacity?: number;
   style?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
+  contentContainerStyle?: StyleProp<ViewStyle>;
   // 是否响应键盘弹出收起时，自动推动内容位置
   avoidKeyboard?: boolean;
   // 垂直方向内容位置 上 中 下
