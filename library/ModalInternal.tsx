@@ -99,7 +99,7 @@ const ModalInternal: React.FC<ModalInternalProps> = ({
     });
   }
 
-  const content = (
+  let content = (
     <View
       pointerEvents="box-none"
       style={[
@@ -114,8 +114,29 @@ const ModalInternal: React.FC<ModalInternalProps> = ({
     </View>
   );
 
+  content = (
+    // @ts-ignore
+    <RMotionView
+      onWillAnimate={onWillAnimateCallback}
+      config={animationConf}
+      onDidAnimate={onDidAnimate}
+      pointerEvents="box-none"
+      style={[styles.container, containerStyle]}
+      exit={animation!.exit || animation!.from}
+      from={animation!.from}
+      animate={animation!.animate}>
+      {avoidKeyboard ? (
+        <KeyboardAvoidingView pointerEvents="box-none" style={styles.container}>
+          {content}
+        </KeyboardAvoidingView>
+      ) : (
+        content
+      )}
+    </RMotionView>
+  );
+
   return (
-    <View style={[styles.root, containerStyle]} pointerEvents="box-none">
+    <View style={styles.root} pointerEvents="box-none">
       {mask && (
         <Mask
           darkTintColor={darkMaskBackgroundColor}
@@ -126,26 +147,7 @@ const ModalInternal: React.FC<ModalInternalProps> = ({
           disabled={!maskCloseable}
         />
       )}
-
-      <RMotionView
-        onWillAnimate={onWillAnimateCallback}
-        config={animationConf}
-        onDidAnimate={onDidAnimate}
-        pointerEvents="box-none"
-        style={styles.container}
-        exit={animation!.exit || animation!.from}
-        from={animation!.from}
-        animate={animation!.animate}>
-        {avoidKeyboard ? (
-          <KeyboardAvoidingView
-            pointerEvents="box-none"
-            style={styles.container}>
-            {content}
-          </KeyboardAvoidingView>
-        ) : (
-          content
-        )}
-      </RMotionView>
+      {content}
     </View>
   );
 };

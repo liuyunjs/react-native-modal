@@ -1,6 +1,6 @@
 import React from 'react';
 import { AnimatePresence } from 'rmotion';
-import { LegacyPortal, PortalStore } from 'react-native-portal-view';
+import { Portal, PortalStore } from 'react-native-portal-view';
 import { useReactCallback } from '@liuyunjs/hooks/lib/useReactCallback';
 import { useReactionState } from '@liuyunjs/hooks/lib/useReactionState';
 import { useConst } from '@liuyunjs/hooks/lib/useConst';
@@ -11,7 +11,7 @@ export const Modal: React.FC<ModalProps> = ({
   visible: visibleInput,
   onChange,
   onWillChange,
-  fullScreen = true,
+  fullScreen,
   namespace,
   override,
   store,
@@ -20,7 +20,6 @@ export const Modal: React.FC<ModalProps> = ({
   const [visible, setVisible] = useReactionState<boolean | undefined>(
     !!visibleInput,
   );
-  PortalStore.getUpdater(namespace).setContainer(AnimatePresence);
 
   const onDidAnimate = useReactCallback((exit: boolean) => {
     onChange?.(!exit);
@@ -35,7 +34,6 @@ export const Modal: React.FC<ModalProps> = ({
   const elem = visible ? (
     <ModalInternal
       {...rest}
-      key="modal"
       onDidAnimate={onDidAnimate}
       onRequestClose={onRequestClose}
       onWillAnimate={onWillAnimate}
@@ -44,9 +42,16 @@ export const Modal: React.FC<ModalProps> = ({
 
   if (!fullScreen) return elem;
 
+  store!.getUpdater(namespace).setContainer(AnimatePresence);
+
   return (
-    <LegacyPortal store={store} namespace={namespace} override={override}>
+    <Portal store={store} namespace={namespace} override={override}>
       {elem!}
-    </LegacyPortal>
+    </Portal>
   );
+};
+
+Modal.defaultProps = {
+  store: PortalStore,
+  fullScreen: true,
 };
