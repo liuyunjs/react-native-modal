@@ -5808,10 +5808,10 @@ react-native-codegen@^0.0.6:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
-react-native-portal-view@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/react-native-portal-view/-/react-native-portal-view-1.0.7.tgz#316e4dfcaf88f49eab0e19c150ec419049a97a34"
-  integrity sha512-1q8k1EsbMB99Jq2/evlfhT1CjMQz1eN5Wn61p4wTlrsfC08ErP/NmM+j+6jS9FqkKM3X7JW5RqIYe1aqe252HQ==
+react-native-portal-view@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/react-native-portal-view/-/react-native-portal-view-1.0.8.tgz#38a0f7b9d2b8793d822385edcff298db247e6c19"
+  integrity sha512-w8pgJ5ldinrXS5LEMYp82W4ZVHU6UdApMg42dSifEBS7UbXn7Wke0SnpWcicy0w1SGrdurmr+g+ER5wLQhDe7Q==
 
 react-native-reanimated@^2.2.0:
   version "2.2.0"

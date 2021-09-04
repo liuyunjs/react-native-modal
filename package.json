@@ -18,7 +18,7 @@
   "dependencies": {
     "@liuyunjs/hooks": "^1.1.5",
     "@liuyunjs/utils": "^1.0.0",
-    "react-native-portal-view": "^1.0.7",
+    "react-native-portal-view": "^1.0.8",
     "rmotion": "^1.0.0",
     "rn-darkly": "^1.0.3",
     "rn-mask": "^1.0.1"
