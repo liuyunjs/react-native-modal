@@ -40,7 +40,7 @@ export const Modal: React.FC<ModalProps> = ({
     />
   ) : null;
 
-  if (!fullScreen) return elem;
+  if (!fullScreen) return <AnimatePresence>{elem}</AnimatePresence>;
 
   store!.getUpdater(namespace).setContainer(AnimatePresence);
 
