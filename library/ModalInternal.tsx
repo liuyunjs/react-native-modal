@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   View,
   KeyboardAvoidingView,
@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { RMotionView } from 'rmotion';
 import { Mask } from 'rn-mask';
+import { darkly } from 'rn-darkly';
 import { getLayout } from './utils';
 import { slideDown } from './animations';
 import { ModalInternalProps } from './types';
@@ -17,14 +18,15 @@ const useKeyboardShowRef = (keyboardDismissWillHide: boolean) => {
   const isShowRef = React.useRef(false);
   React.useEffect(() => {
     if (keyboardDismissWillHide) {
-      const str = Platform.select({ ios: 'Will', default: 'Did' });
+      const str = Platform.select({
+        ios: 'Will' as const,
+        default: 'Did' as const,
+      });
 
-      // @ts-ignore
       const hideHandler = Keyboard.addListener(`keyboard${str}Hide`, () => {
         isShowRef.current = false;
       });
 
-      // @ts-ignore
       const showHandler = Keyboard.addListener(`keyboard${str}Show`, () => {
         isShowRef.current = true;
       });
@@ -73,10 +75,9 @@ const ModalInternal: React.FC<ModalInternalProps> = ({
   onDidAnimate,
   keyboardDismissWillHide,
   backHandlerType,
-  forceDark,
-  darkMaskBackgroundColor,
   containerStyle,
   contentContainerStyle,
+  forceDark,
 }) => {
   const isShowRef = useKeyboardShowRef(!!keyboardDismissWillHide);
 
@@ -116,7 +117,6 @@ const ModalInternal: React.FC<ModalInternalProps> = ({
   );
 
   content = (
-    // @ts-ignore
     <RMotionView
       onWillAnimate={onWillAnimateCallback}
       config={animationConf}
@@ -140,7 +140,6 @@ const ModalInternal: React.FC<ModalInternalProps> = ({
     <View style={[styles.root, containerStyle]} pointerEvents="box-none">
       {mask && (
         <Mask
-          darkTintColor={darkMaskBackgroundColor}
           forceDark={forceDark}
           config={animationConf}
           tintColor={maskBackgroundColor}
@@ -161,4 +160,12 @@ ModalInternal.defaultProps = {
   backHandlerType: 'reaction',
 };
 
-export const ModalInternalMemo = React.memo(ModalInternal);
+export const ModalInternalMemo = React.memo(
+  darkly(
+    ModalInternal,
+    'style',
+    'containerStyle',
+    'contentContainerStyle',
+    'maskBackgroundColor',
+  ),
+);

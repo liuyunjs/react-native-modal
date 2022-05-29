@@ -1,12 +1,17 @@
 import { StyleProp, ViewStyle } from 'react-native';
-import { AnimationProps, AnimationPresupposition } from 'rmotion';
+import { RMotionProps } from 'rmotion';
 import React from 'react';
-import { PortalProps } from 'react-native-portal-view';
-import { PortalStore } from 'react-native-portal-view/dist/PortalStore';
+import type { PortalProps } from 'react-native-portal-view/dist/Portal';
+import type { AdapterProps } from 'rn-darkly/dist/darkly';
 
 export type VerticalLayout = 'center' | 'top' | 'bottom';
 
 export type HorizontalLayout = 'center' | 'left' | 'right';
+
+export type AnimationPresupposition = Pick<
+  RMotionProps,
+  'from' | 'animate' | 'exit'
+>;
 
 export type ModalityProps = {
   // 模态框显示隐藏
@@ -31,7 +36,6 @@ export type ModalInternalProps = {
   // 遮罩背景
   maskBackgroundColor?: string;
 
-  darkMaskBackgroundColor?: string;
   // 遮罩透明度
   // maskOpacity?: number;
   style?: StyleProp<ViewStyle>;
@@ -49,7 +53,7 @@ export type ModalInternalProps = {
   // 自定义动画
   animation?: AnimationPresupposition;
   // 自定义动画配置
-  animationConf?: AnimationProps['config'];
+  animationConf?: RMotionProps['config'];
   // 在模态框将要关闭的时候收起键盘
   keyboardDismissWillHide?: boolean;
   // backHandlerReaction?: boolean;
@@ -61,9 +65,10 @@ export type ModalInternalProps = {
 
 export type ModalProps = ModalityProps &
   PortalProps &
-  Omit<
-    ModalInternalProps,
-    'onWillAnimate' | 'onDidAnimate' | 'onRequestClose'
-  > & {
-    store?: PortalStore;
-  };
+  AdapterProps<
+    Omit<
+      ModalInternalProps,
+      'onWillAnimate' | 'onDidAnimate' | 'onRequestClose'
+    >,
+    ['style', 'contentContainerStyle', 'maskBackgroundColor', 'containerStyle']
+  >;

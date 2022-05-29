@@ -1,6 +1,6 @@
-import { PortalStore } from 'react-native-portal-view/dist/PortalStore';
+import { PortalStore } from 'react-native-portal-view';
 import { AnimatePresence } from 'rmotion';
-import React from 'react';
+import * as React from 'react';
 import { isAnyObject } from '@liuyunjs/utils/lib/isAnyObject';
 import { isNil } from '@liuyunjs/utils/lib/isNil';
 import { ModalInternalProps } from './types';

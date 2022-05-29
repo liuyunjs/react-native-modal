@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { AnimatePresence } from 'rmotion';
-import { Portal, PortalStore } from 'react-native-portal-view';
+import { Portal, PortalStoreContext } from 'react-native-portal-view';
 import { useReactCallback } from '@liuyunjs/hooks/lib/useReactCallback';
 import { useReactionState } from '@liuyunjs/hooks/lib/useReactionState';
 import { useConst } from '@liuyunjs/hooks/lib/useConst';
@@ -13,10 +13,10 @@ export const Modal: React.FC<ModalProps> = ({
   onWillChange,
   fullScreen,
   namespace,
-  override,
-  store,
   ...rest
 }) => {
+  const store = React.useContext(PortalStoreContext);
+
   const [visible, setVisible] = useReactionState<boolean | undefined>(
     !!visibleInput,
   );
@@ -44,14 +44,9 @@ export const Modal: React.FC<ModalProps> = ({
 
   store!.getUpdater(namespace).setContainer(AnimatePresence);
 
-  return (
-    <Portal store={store} namespace={namespace} override={override}>
-      {elem!}
-    </Portal>
-  );
+  return <Portal namespace={namespace}>{elem!}</Portal>;
 };
 
 Modal.defaultProps = {
-  store: PortalStore,
   fullScreen: true,
 };

@@ -14,6 +14,7 @@
 		3B3C517B3557BB277F9A1BF5 /* libPods-modal-modalTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DC2BC2940C3B9277B7D16 /* libPods-modal-modalTests.a */; };
 		3D667FBFCF088551846DC31A /* libPods-modal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0136E4BDCC7164664588A610 /* libPods-modal.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		DF09139E2843676300A3A021 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF09139D2843676300A3A021 /* App.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		70807E9853BBDB02B26A5EE2 /* Pods-modal-modalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-modal-modalTests.debug.xcconfig"; path = "Target Support Files/Pods-modal-modalTests/Pods-modal-modalTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = modal/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA0DC2BC2940C3B9277B7D16 /* libPods-modal-modalTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-modal-modalTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF09139C2843676200A3A021 /* modal-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "modal-Bridging-Header.h"; sourceTree = "<group>"; };
+		DF09139D2843676300A3A021 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -92,6 +95,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				DF09139D2843676300A3A021 /* App.swift */,
+				DF09139C2843676200A3A021 /* modal-Bridging-Header.h */,
 			);
 			name = modal;
 			sourceTree = "<group>";
@@ -145,7 +150,6 @@
 				70807E9853BBDB02B26A5EE2 /* Pods-modal-modalTests.debug.xcconfig */,
 				2885489DFFBBB718D65B1C39 /* Pods-modal-modalTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -208,7 +212,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -411,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF09139E2843676300A3A021 /* App.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -431,6 +436,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 70807E9853BBDB02B26A5EE2 /* Pods-modal-modalTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -458,6 +464,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2885489DFFBBB718D65B1C39 /* Pods-modal-modalTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = modalTests/Info.plist;
@@ -498,6 +505,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = modal;
+				SWIFT_OBJC_BRIDGING_HEADER = "modal-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -523,6 +531,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = modal;
+				SWIFT_OBJC_BRIDGING_HEADER = "modal-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

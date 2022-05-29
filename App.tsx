@@ -1,10 +1,10 @@
 import React from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
-import { Modal } from './library/main';
+import { Modal, ModalInternal } from './dist/main';
 
 export default function App() {
   const [v, setV] = React.useState(false);
-  const keyRef = React.useRef();
+  const keyRef = React.useRef<string>();
 
   const elem = (
     <View style={{ height: 300, backgroundColor: 'red' }}>
@@ -36,7 +36,7 @@ export default function App() {
           keyRef.current = Modal.add({
             children: elem,
             onRequestClose: () => (
-              Modal.remove(keyRef.current), (keyRef.current = undefined)
+              Modal.remove(keyRef.current!), (keyRef.current = undefined)
             ),
           });
         }}>

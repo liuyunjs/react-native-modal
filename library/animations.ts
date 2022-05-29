@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-import { AnimationPresupposition } from 'rmotion';
+import { AnimationPresupposition } from './types';
 
 const { width, height } = Dimensions.get('window');
 
