@@ -59,7 +59,7 @@ const useBackHandler = ({
   }, [backHandlerType]);
 };
 
-const ModalInternal: React.FC<ModalInternalProps> = ({
+export const ModalInternal: React.FC<ModalInternalProps> = ({
   mask,
   maskBackgroundColor,
   maskCloseable,
@@ -160,7 +160,7 @@ ModalInternal.defaultProps = {
   backHandlerType: 'reaction',
 };
 
-export const ModalInternalMemo = React.memo(
+export const DarklyModalInternal = React.memo(
   darkly(
     ModalInternal,
     'style',

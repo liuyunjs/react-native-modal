@@ -63,12 +63,12 @@ export type ModalInternalProps = {
   forceDark?: boolean;
 };
 
-export type ModalProps = ModalityProps &
-  PortalProps &
-  AdapterProps<
-    Omit<
-      ModalInternalProps,
-      'onWillAnimate' | 'onDidAnimate' | 'onRequestClose'
-    >,
-    ['style', 'contentContainerStyle', 'maskBackgroundColor', 'containerStyle']
-  >;
+export type ModalHocProps = ModalityProps & PortalProps;
+
+export type ComposeModalProps<P extends any> = ModalHocProps &
+  Omit<P, 'onWillAnimate' | 'onDidAnimate' | 'onRequestClose'>;
+
+export type ModalProps = AdapterProps<
+  ComposeModalProps<ModalInternalProps>,
+  ['style', 'contentContainerStyle', 'maskBackgroundColor', 'containerStyle']
+>;

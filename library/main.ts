@@ -1,6 +1,6 @@
 import 'react-native-portal-view';
-import { DefaultStore } from 'react-native-portal-view';
-import { Modal as ModalInternal } from './Modal';
+import { ModalInternal, DarklyModalInternal } from './ModalInternal';
+import { withModal } from './withModal';
 import { extend } from './extend';
 import * as animations from './animations';
 export type {
@@ -12,7 +12,15 @@ export type {
   VerticalLayout,
 } from './types';
 
-const Modal = extend(ModalInternal, DefaultStore);
+const Modal = withModal(DarklyModalInternal);
 
 export default Modal;
-export { animations, Modal, extend, ModalInternal };
+
+export {
+  animations,
+  Modal,
+  DarklyModalInternal,
+  ModalInternal,
+  withModal,
+  extend,
+};

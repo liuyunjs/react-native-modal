@@ -1,17 +1,21 @@
 import React from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
-import { Modal, ModalInternal } from './dist/main';
+import { Modal } from './library/main';
 
 export default function App() {
   const [v, setV] = React.useState(false);
   const keyRef = React.useRef<string>();
 
   const elem = (
-    <View style={{ height: 300, backgroundColor: 'red' }}>
+    <View
+      style={{
+        height: 300,
+        backgroundColor: 'red',
+      }}>
       <Text
         onPress={() => {
           if (keyRef.current) {
-            Modal.remove(keyRef.current);
+            Modal.hide(keyRef.current);
             keyRef.current = undefined;
             return;
           }
@@ -33,7 +37,7 @@ export default function App() {
       <Text
         onPress={() => {
           if (keyRef.current) return;
-          keyRef.current = Modal.add({
+          keyRef.current = Modal.show({
             children: elem,
             onRequestClose: () => (
               Modal.remove(keyRef.current!), (keyRef.current = undefined)
