@@ -1,12 +1,12 @@
 {
   "name": "react-native-smart-modal",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": false,
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
   "scripts": {
     "build": "rimraf ./dist; rollup -c rollup.config.js",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "rollup -c rollup.config.js"
   },
   "bugs": {
     "url": "https://github.com/liuyunjs/react-native-modal/issues"
