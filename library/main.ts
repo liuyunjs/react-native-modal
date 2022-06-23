@@ -2,7 +2,7 @@ import 'react-native-portal-view';
 import { ModalInternal, DarklyModalInternal } from './ModalInternal';
 import { withModal } from './withModal';
 import { extend } from './extend';
-import * as animations from './animations';
+import * as animations from './legacyAnimations';
 export type {
   ModalProps,
   ModalityProps,

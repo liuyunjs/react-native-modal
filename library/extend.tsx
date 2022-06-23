@@ -49,7 +49,13 @@ export const extendInternal = <T extends {}>(
     show,
     hide,
     update,
+    /**
+     * @deprecated 请使用 show 方法替代
+     */
     add: show,
+    /**
+     * @deprecated 请使用 hide 方法替代
+     */
     remove: hide,
   };
 };

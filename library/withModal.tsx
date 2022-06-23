@@ -6,7 +6,6 @@ import {
   PortalStore,
   PortalStoreContext,
 } from 'react-native-portal-view';
-import { useReactCallback } from '@liuyunjs/hooks/lib/useReactCallback';
 import { useReactionState } from '@liuyunjs/hooks/lib/useReactionState';
 import { useConst } from '@liuyunjs/hooks/lib/useConst';
 import { ComposeModalProps } from './types';
@@ -15,7 +14,7 @@ import { extendInternal } from './extend';
 export const withModal = <T extends {}>(
   Component: React.ComponentType<T>,
   Container: React.ComponentType<any> = AnimatePresence,
-  store: PortalStore = DefaultStore,
+  storeInput: PortalStore = DefaultStore,
 ) => {
   const Modal: React.FC<ComposeModalProps<T>> = ({
     visible: visibleInput,
@@ -23,21 +22,24 @@ export const withModal = <T extends {}>(
     onWillChange,
     fullScreen = true,
     namespace,
+    useContextStore,
     ...rest
   }) => {
-    const store = React.useContext(PortalStoreContext);
+    const contextStore = React.useContext(PortalStoreContext);
+
+    const store = useContextStore ? contextStore : storeInput;
 
     const [visible, setVisible] = useReactionState<boolean | undefined>(
       !!visibleInput,
     );
 
-    const onDidAnimate = useReactCallback((exit: boolean) => {
+    const onDidAnimate = (exit: boolean) => {
       onChange?.(!exit);
-    });
+    };
 
-    const onWillAnimate = useReactCallback((exit: boolean) => {
+    const onWillAnimate = (exit: boolean) => {
       onWillChange?.(!exit);
-    });
+    };
 
     const onRequestClose = useConst(() => setVisible(false));
 
@@ -57,9 +59,9 @@ export const withModal = <T extends {}>(
     return <Portal namespace={namespace}>{elem!}</Portal>;
   };
 
-  Modal.displayName = `withModal${
+  Modal.displayName = `withModal(${
     Component.displayName || Component.name || 'Component'
-  }`;
+  })`;
 
-  return Object.assign(Modal, extendInternal(store, Component, Container));
+  return Object.assign(Modal, extendInternal(storeInput, Component, Container));
 };

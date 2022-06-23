@@ -7,11 +7,11 @@ import {
   BackHandler,
 } from 'react-native';
 import { RMotionView } from 'rmotion';
+import * as animations from 'rmotion/dist/animations/main';
 import { Mask } from 'rn-mask';
 import { darkly } from 'rn-darkly';
 import { getLayout } from './utils';
-import { slideDown } from './animations';
-import { ModalInternalProps } from './types';
+import { AnimationPresupposition, ModalInternalProps } from './types';
 import { styles } from './styles';
 
 const useKeyboardShowRef = (keyboardDismissWillHide: boolean) => {
@@ -78,21 +78,20 @@ export const ModalInternal: React.FC<ModalInternalProps> = ({
   containerStyle,
   contentContainerStyle,
   forceDark,
+  animationIn,
+  animationOut,
 }) => {
   const isShowRef = useKeyboardShowRef(!!keyboardDismissWillHide);
 
-  const onWillAnimateCallback = React.useCallback(
-    (exit: boolean) => {
-      if (exit) {
-        if (isShowRef.current) {
-          isShowRef.current = false;
-          Keyboard.dismiss();
-        }
+  const onWillAnimateCallback = (exit: boolean) => {
+    if (exit) {
+      if (isShowRef.current) {
+        isShowRef.current = false;
+        Keyboard.dismiss();
       }
-      onWillAnimate?.(exit);
-    },
-    [onWillAnimate],
-  );
+    }
+    onWillAnimate?.(exit);
+  };
 
   if (Platform.OS === 'android') {
     useBackHandler({
@@ -116,16 +115,30 @@ export const ModalInternal: React.FC<ModalInternalProps> = ({
     </View>
   );
 
+  const animationProps: AnimationPresupposition = {};
+  if (animation) {
+    animationProps.exit = animation.exit || animation.from;
+    animationProps.from = animation.from;
+    animationProps.animate = animation.animate;
+  }
+
+  if (!animationProps.animate) {
+    delete animationProps.from;
+    animationProps.animate = animations[animationIn!];
+  }
+
+  if (!animationProps.exit) {
+    animationProps.exit = animations[animationOut!];
+  }
+
   content = (
     <RMotionView
+      {...animationProps}
       onWillAnimate={onWillAnimateCallback}
       config={animationConf}
       onDidAnimate={onDidAnimate}
       pointerEvents="box-none"
-      style={[styles.container, contentContainerStyle]}
-      exit={animation!.exit || animation!.from}
-      from={animation!.from}
-      animate={animation!.animate}>
+      style={[styles.container, contentContainerStyle]}>
       {avoidKeyboard ? (
         <KeyboardAvoidingView pointerEvents="box-none" style={styles.container}>
           {content}
@@ -153,19 +166,18 @@ export const ModalInternal: React.FC<ModalInternalProps> = ({
 };
 
 ModalInternal.defaultProps = {
-  animation: slideDown,
+  animationIn: 'fadeDownBigIn',
+  animationOut: 'fadeDownBigOut',
   mask: true,
   maskCloseable: true,
   verticalLayout: 'bottom',
   backHandlerType: 'reaction',
 };
 
-export const DarklyModalInternal = React.memo(
-  darkly(
-    ModalInternal,
-    'style',
-    'containerStyle',
-    'contentContainerStyle',
-    'maskBackgroundColor',
-  ),
+export const DarklyModalInternal = darkly(
+  ModalInternal,
+  'style',
+  'containerStyle',
+  'contentContainerStyle',
+  'maskBackgroundColor',
 );

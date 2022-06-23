@@ -3,6 +3,46 @@ import { RMotionProps } from 'rmotion';
 import React from 'react';
 import type { PortalProps } from 'react-native-portal-view/dist/Portal';
 import type { AdapterProps } from 'rn-darkly/dist/darkly';
+import {
+  BounceType,
+  FadeType,
+  FlipType,
+  SlideType,
+  ZoomType,
+} from 'rmotion/dist/animations/main';
+
+type FadeInAnimations = `fade${FadeType}In`;
+type FadeOutAnimations = `fade${FadeType}Out`;
+
+type FlipInAnimations = `flip${FlipType}In`;
+type FlipOutAnimations = `flip${FlipType}Out`;
+
+type SlideInAnimations = `slide${SlideType}In`;
+type SlideOutAnimations = `slide${SlideType}Out`;
+
+type ZoomInAnimations = `zoom${ZoomType}In`;
+type ZoomOutAnimations = `zoom${ZoomType}Out`;
+type BounceInAnimations = `bounce${BounceType}In`;
+type BounceOutAnimations = `bounce${BounceType}Out`;
+
+type LightSpeedInAnimations = 'lightSpeedIn';
+type LightSpeedOutAnimations = 'lightSpeedOut';
+
+export type AnimationIn = `${
+  | FadeInAnimations
+  | SlideInAnimations
+  | ZoomInAnimations
+  | LightSpeedInAnimations
+  | FlipInAnimations
+  | BounceInAnimations}`;
+
+export type AnimationOut = `${
+  | FadeOutAnimations
+  | SlideOutAnimations
+  | ZoomOutAnimations
+  | BounceOutAnimations
+  | LightSpeedOutAnimations
+  | FlipOutAnimations}`;
 
 export type VerticalLayout = 'center' | 'top' | 'bottom';
 
@@ -11,7 +51,7 @@ export type HorizontalLayout = 'center' | 'left' | 'right';
 export type AnimationPresupposition = Pick<
   RMotionProps,
   'from' | 'animate' | 'exit'
->;
+> & { style?: StyleProp<ViewStyle> };
 
 export type ModalityProps = {
   // 模态框显示隐藏
@@ -22,6 +62,8 @@ export type ModalityProps = {
   onWillChange?: (visible: boolean) => void;
 
   fullScreen?: boolean;
+
+  useContextStore?: boolean;
 };
 
 export type ModalInternalProps = {
@@ -49,6 +91,9 @@ export type ModalInternalProps = {
   horizontalLayout?: HorizontalLayout;
 
   children?: React.ReactNode;
+
+  animationIn?: AnimationIn;
+  animationOut?: AnimationOut;
 
   // 自定义动画
   animation?: AnimationPresupposition;
