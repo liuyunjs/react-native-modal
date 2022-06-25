@@ -1280,7 +1280,7 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@liuyunjs/hooks@>=1", "@liuyunjs/hooks@^1":
+"@liuyunjs/hooks@^1":
   version "1.1.5"
   resolved "https://registry.npmjs.org/@liuyunjs/hooks/-/hooks-1.1.5.tgz#828ac6d08870b6a4f2053f587503ddc808b3c47d"
   integrity sha512-6dX8Zq/xwDmZ9EldARqlvNt/gW8CYkbNef3QcyBVf+8lR0AIdo8+n9eTFj9cBBhJUhboNywLfqcUwbyOoGwMBA==
@@ -1305,7 +1305,7 @@
   dependencies:
     react-will-mount-hook "^1.0.1"
 
-"@liuyunjs/utils@>=1", "@liuyunjs/utils@^1":
+"@liuyunjs/utils@^1":
   version "1.2.5"
   resolved "https://registry.npmjs.org/@liuyunjs/utils/-/utils-1.2.5.tgz#837a9fe455aba086d92600ba4f1ae98358704148"
   integrity sha512-XgPG3LTORT8AKaFi0Efm2HTr7YkEWXQZyxH9gF3tcA0t25fjOViggzEDVBD7Fuz/Al5sE+fd7y5X+2Hp1XLSvg==
@@ -5946,7 +5946,7 @@ react-native-codegen@^0.0.6:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
-react-native-portal-view@>=2:
+react-native-portal-view@^2:
   version "2.0.1"
   resolved "https://registry.npmjs.org/react-native-portal-view/-/react-native-portal-view-2.0.1.tgz#8a7a6aec2b36e74855a9cd46e7a59f8a4f253f92"
   integrity sha512-WZq2Zl30H6KHaB/njDNIJblf0Rk0pO1tfoWGbccl9QhrF4wSPBYEOAB1ggXOb+lkQH3RjWsTe4Fuu+FcWJvapg==
@@ -6291,17 +6291,6 @@ rimraf@~2.6.2:
   dependencies:
     glob "^7.1.3"
 
-rmotion@>=2.1.1:
-  version "2.1.1"
-  resolved "https://registry.npmjs.org/rmotion/-/rmotion-2.1.1.tgz#6b718590e66fb9961cc9ae323d5b117cb9d1c89d"
-  integrity sha512-A/BqWozkAg+Thj32rxn448Fz26eWOXWjprU/JOlodE6U7VdJT+7yEf0JnikaUpmkFnv0kOnKAmU2LcTUwrrawg==
-  dependencies:
-    "@liuyunjs/hooks" "^1"
-    "@liuyunjs/utils" "^1"
-    "@types/hoist-non-react-statics" "^3.3.1"
-    framer-motion "^4.1.17"
-    hoist-non-react-statics "*"
-
 rmotion@^2:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/rmotion/-/rmotion-2.0.0.tgz#c21263cb7192e29b67ceae44b0d3512fa68904a2"
@@ -6313,7 +6302,18 @@ rmotion@^2:
     framer-motion "^4.1.17"
     hoist-non-react-statics "*"
 
-rn-darkly@>=2, rn-darkly@^2:
+rmotion@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.npmjs.org/rmotion/-/rmotion-2.1.2.tgz#f11868e082785ef12c223e3919f4f89e5958e7ed"
+  integrity sha512-eITnqWKcURjp0VcWU0AvjzF3B1MwPtiGvK8XyKFbSMQl52Fl4/WtNqnggE5hBaqvEUVdBuSmT1GbQf0kRX2iUQ==
+  dependencies:
+    "@liuyunjs/hooks" "^1"
+    "@liuyunjs/utils" "^1"
+    "@types/hoist-non-react-statics" "^3.3.1"
+    framer-motion "^4.1.17"
+    hoist-non-react-statics "*"
+
+rn-darkly@^2:
   version "2.0.0"
   resolved "https://registry.npmjs.org/rn-darkly/-/rn-darkly-2.0.0.tgz#6c30d7f78a2aa2a41041f88483da1129550909e8"
   integrity sha512-M6cnrUrZzUpdFSqTtHFp4LLMJGa/IlsjEZoIERzQ92XAOSXE/KkgDnUpdEFcy5lxXXlX/+hgmRlB68ZeSfaCjQ==
@@ -6321,7 +6321,7 @@ rn-darkly@>=2, rn-darkly@^2:
     "@types/hoist-non-react-statics" "^3.3.1"
     hoist-non-react-statics "^3.3.2"
 
-rn-mask@>=2:
+rn-mask@^2:
   version "2.0.0"
   resolved "https://registry.npmjs.org/rn-mask/-/rn-mask-2.0.0.tgz#cc216505cd01ae8465266ade2dc3a2c7f7e23f78"
   integrity sha512-dvKLD3NjkXd6P8w+I/j6sdIdfLUcMLgNT74NoUihKESQAaXp3iH9VXr4+qFWtprWBhnXGaojOa6s/+l+fpNiOQ==

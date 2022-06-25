@@ -108,7 +108,7 @@ export type ModalInternalProps = {
   forceDark?: boolean;
 };
 
-export type ModalHocProps = ModalityProps & PortalProps;
+export type ModalHocProps = ModalityProps & Partial<PortalProps>;
 
 export type ComposeModalProps<P extends any> = ModalHocProps &
   Omit<P, 'onWillAnimate' | 'onDidAnimate' | 'onRequestClose'>;

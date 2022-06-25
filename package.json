@@ -1,6 +1,6 @@
 {
   "name": "react-native-smart-modal",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "private": false,
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
@@ -16,12 +16,12 @@
     "url": "https://github.com/liuyunjs/react-native-modal"
   },
   "dependencies": {
-    "@liuyunjs/hooks": ">=1",
-    "@liuyunjs/utils": ">=1",
-    "react-native-portal-view": ">=2",
-    "rmotion": ">=2.1.1",
-    "rn-darkly": ">=2",
-    "rn-mask": ">=2"
+    "@liuyunjs/hooks": "^1",
+    "@liuyunjs/utils": "^1",
+    "react-native-portal-view": "^2",
+    "rmotion": "^2.1.2",
+    "rn-darkly": "^2",
+    "rn-mask": "^2"
   },
   "keywords": [
     "react-native-modal",
