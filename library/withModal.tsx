@@ -1,67 +1,48 @@
 import * as React from 'react';
-import { AnimatePresence } from 'rmotion';
-import {
-  DefaultStore,
-  Portal,
-  PortalStore,
-  PortalStoreContext,
-} from 'react-native-portal-view';
+import { DefaultStore, Portal, PortalStore } from 'react-native-portal-view';
 import { useReactionState } from '@liuyunjs/hooks/lib/useReactionState';
-import { useConst } from '@liuyunjs/hooks/lib/useConst';
-import { ComposeModalProps } from './types';
-import { extendInternal } from './extend';
+import type { DarklyProps } from 'rn-darkly/dist/darkly';
+import { extend } from './extend';
+import { ModalityProps } from './types';
 
 export const withModal = <T extends {}>(
   Component: React.ComponentType<T>,
-  Container: React.ComponentType<any> = AnimatePresence,
-  storeInput: PortalStore = DefaultStore,
+  store: PortalStore = DefaultStore,
 ) => {
-  const Modal: React.FC<ComposeModalProps<T>> = ({
+  const Modal: React.FC<ModalityProps & DarklyProps & T> = ({
     visible: visibleInput,
     onChange,
-    onWillChange,
     fullScreen = true,
+    useCustomStore = true,
     namespace,
-    useContextStore,
     ...rest
   }) => {
-    const contextStore = React.useContext(PortalStoreContext);
+    const [visible, setVisible] = useReactionState(!!visibleInput);
 
-    const store = useContextStore ? contextStore : storeInput;
-
-    const [visible, setVisible] = useReactionState<boolean | undefined>(
-      !!visibleInput,
-    );
-
-    const onDidAnimate = (exit: boolean) => {
-      onChange?.(!exit);
+    const onRequestClose = () => {
+      onChange?.(false);
+      setVisible(false);
     };
-
-    const onWillAnimate = (exit: boolean) => {
-      onWillChange?.(!exit);
-    };
-
-    const onRequestClose = useConst(() => setVisible(false));
 
     const elem = visible ? (
-      <Component
-        {...(rest as any)}
-        onDidAnimate={onDidAnimate}
-        onRequestClose={onRequestClose}
-        onWillAnimate={onWillAnimate}
-      />
+      <Component {...(rest as any)} onRequestClose={onRequestClose} />
     ) : null;
 
-    if (!fullScreen) return <Container>{elem}</Container>;
-
-    store!.getUpdater(namespace).setContainer(Container);
-
-    return <Portal namespace={namespace}>{elem!}</Portal>;
+    return fullScreen ? (
+      <Portal
+        useCustomStore={useCustomStore as true}
+        store={store}
+        namespace={namespace}>
+        {elem}
+      </Portal>
+    ) : (
+      elem
+    );
   };
 
   Modal.displayName = `withModal(${
     Component.displayName || Component.name || 'Component'
   })`;
 
-  return Object.assign(Modal, extendInternal(storeInput, Component, Container));
+  return Object.assign(Modal, extend(store, Component));
 };

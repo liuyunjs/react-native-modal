@@ -1,15 +1,19 @@
-import React from 'react';
+import * as React from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
-
-import { Modal, animations } from './library/main';
+import { Modal } from './library/main';
 
 export default function App() {
-  const [v, setV] = React.useState(false);
+  const [visible, setVisible] = React.useState(false);
   const keyRef = React.useRef<string>();
 
   const elem = (
     <View style={{ backgroundColor: 'red', height: 300 }}>
-      <Text>Text</Text>
+      <Text
+        onPress={() => {
+          setVisible(!visible);
+        }}>
+        Text
+      </Text>
     </View>
   );
 
@@ -17,7 +21,7 @@ export default function App() {
     <SafeAreaView style={{ flex: 1 }}>
       <Text
         onPress={() => {
-          setV(!v);
+          setVisible(!visible);
         }}>
         Show Modal
       </Text>
@@ -28,23 +32,13 @@ export default function App() {
           keyRef.current = Modal.show({
             children: elem,
             onRequestClose: () => (
-              Modal.remove(keyRef.current!), (keyRef.current = undefined)
+              Modal.hide(keyRef.current!), (keyRef.current = undefined)
             ),
           });
         }}>
         Show Modal2
       </Text>
-      <Modal
-        // mask={false}
-        // animationConf={{ duration: 1000 }}
-        // contentContainerStyle={{
-        //   backfaceVisibility: 'hidden',
-        // }}
-        // verticalLayout="center"
-        // horizontalLayout="center"
-        // animation={animations.flipXInOut}
-        visible={v}
-        onWillChange={setV}>
+      <Modal visible={visible} onChange={setVisible}>
         {elem}
       </Modal>
     </SafeAreaView>

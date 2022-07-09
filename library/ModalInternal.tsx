@@ -6,12 +6,11 @@ import {
   Platform,
   BackHandler,
 } from 'react-native';
-import { RMotionView } from 'rmotion';
-import * as animations from 'rmotion/dist/animations/main';
+import Animated, { SlideInDown, SlideOutDown } from 'react-native-reanimated';
 import { Mask } from 'rn-mask';
-import { darkly } from 'rn-darkly';
+import type { DarklyProps } from 'rn-darkly/dist/darkly';
 import { getLayout } from './utils';
-import { AnimationPresupposition, ModalInternalProps } from './types';
+import { ModalInternalProps } from './types';
 import { styles } from './styles';
 
 const useKeyboardShowRef = (keyboardDismissWillHide: boolean) => {
@@ -51,49 +50,50 @@ const useBackHandler = ({
   React.useEffect(() => {
     if (backHandlerType && backHandlerType !== 'none') {
       const handler = BackHandler.addEventListener('hardwareBackPress', () => {
-        if (backHandlerType === 'reaction') onRequestClose?.();
+        if (backHandlerType === 'reaction') {
+          onRequestClose?.();
+        }
         return true;
       });
       return () => handler.remove();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [backHandlerType]);
 };
 
-export const ModalInternal: React.FC<ModalInternalProps> = ({
+export const Modal: React.FC<ModalInternalProps & DarklyProps> = ({
   mask,
   maskBackgroundColor,
   maskCloseable,
-  animationConf,
-  animation,
   avoidKeyboard,
   horizontalLayout,
   verticalLayout,
   style,
-  children,
   onRequestClose,
-  onWillAnimate,
-  onDidAnimate,
   keyboardDismissWillHide,
   backHandlerType,
   containerStyle,
   contentContainerStyle,
   forceDark,
+  children,
   animationIn,
   animationOut,
+  maskAnimationOut,
+  maskAnimationIn,
 }) => {
   const isShowRef = useKeyboardShowRef(!!keyboardDismissWillHide);
 
-  const onWillAnimateCallback = (exit: boolean) => {
-    if (exit) {
+  React.useEffect(() => {
+    return () => {
       if (isShowRef.current) {
         isShowRef.current = false;
         Keyboard.dismiss();
       }
-    }
-    onWillAnimate?.(exit);
-  };
+    };
+  }, [isShowRef]);
 
   if (Platform.OS === 'android') {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useBackHandler({
       onRequestClose,
       backHandlerType,
@@ -115,28 +115,10 @@ export const ModalInternal: React.FC<ModalInternalProps> = ({
     </View>
   );
 
-  const animationProps: AnimationPresupposition = {};
-  if (animation) {
-    animationProps.exit = animation.exit || animation.from;
-    animationProps.from = animation.from;
-    animationProps.animate = animation.animate;
-  }
-
-  if (!animationProps.animate) {
-    delete animationProps.from;
-    animationProps.animate = animations[animationIn!];
-  }
-
-  if (!animationProps.exit) {
-    animationProps.exit = animations[animationOut!];
-  }
-
   content = (
-    <RMotionView
-      {...animationProps}
-      onWillAnimate={onWillAnimateCallback}
-      config={animationConf}
-      onDidAnimate={onDidAnimate}
+    <Animated.View
+      entering={animationIn}
+      exiting={animationOut}
       pointerEvents="box-none"
       style={[styles.container, contentContainerStyle]}>
       {avoidKeyboard ? (
@@ -146,15 +128,16 @@ export const ModalInternal: React.FC<ModalInternalProps> = ({
       ) : (
         content
       )}
-    </RMotionView>
+    </Animated.View>
   );
 
   return (
     <View style={[styles.root, containerStyle]} pointerEvents="box-none">
       {mask && (
         <Mask
+          animationIn={maskAnimationIn}
+          animationOut={maskAnimationOut}
           forceDark={forceDark}
-          config={animationConf}
           tintColor={maskBackgroundColor}
           onPress={onRequestClose}
           disabled={!maskCloseable}
@@ -165,19 +148,11 @@ export const ModalInternal: React.FC<ModalInternalProps> = ({
   );
 };
 
-ModalInternal.defaultProps = {
-  animationIn: 'fadeDownBigIn',
-  animationOut: 'fadeDownBigOut',
+Modal.defaultProps = {
+  animationIn: SlideInDown,
+  animationOut: SlideOutDown,
   mask: true,
   maskCloseable: true,
   verticalLayout: 'bottom',
   backHandlerType: 'reaction',
 };
-
-export const DarklyModalInternal = darkly(
-  ModalInternal,
-  'style',
-  'containerStyle',
-  'contentContainerStyle',
-  'maskBackgroundColor',
-);
