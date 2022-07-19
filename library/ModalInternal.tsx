@@ -6,7 +6,7 @@ import {
   Platform,
   BackHandler,
 } from 'react-native';
-import { RMotionView } from 'rmotion';
+import { RMotionProps, RMotionView } from 'rmotion';
 import * as animations from 'rmotion/dist/animations/main';
 import { Mask } from 'rn-mask';
 import { darkly } from 'rn-darkly';
@@ -115,27 +115,35 @@ export const ModalInternal: React.FC<ModalInternalProps> = ({
     </View>
   );
 
-  const animationProps: AnimationPresupposition = {};
+  const animationProps: RMotionProps = {};
   if (animation) {
+    animationProps.keyframes = false;
+    // @ts-ignore
     animationProps.exit = animation.exit || animation.from;
+    // @ts-ignore
     animationProps.from = animation.from;
+    // @ts-ignore
     animationProps.animate = animation.animate;
   }
 
   if (!animationProps.animate) {
+    // @ts-ignore
+    animationProps.keyframes = true;
     delete animationProps.from;
+    // @ts-ignore
     animationProps.animate = animations[animationIn!];
   }
 
   if (!animationProps.exit) {
+    // @ts-ignore
     animationProps.exit = animations[animationOut!];
   }
 
   content = (
     <RMotionView
       {...animationProps}
+      {...animationConf}
       onWillAnimate={onWillAnimateCallback}
-      config={animationConf}
       onDidAnimate={onDidAnimate}
       pointerEvents="box-none"
       style={[styles.container, contentContainerStyle]}>
@@ -153,8 +161,8 @@ export const ModalInternal: React.FC<ModalInternalProps> = ({
     <View style={[styles.root, containerStyle]} pointerEvents="box-none">
       {mask && (
         <Mask
+          {...animationConf}
           forceDark={forceDark}
-          config={animationConf}
           tintColor={maskBackgroundColor}
           onPress={onRequestClose}
           disabled={!maskCloseable}
@@ -166,8 +174,8 @@ export const ModalInternal: React.FC<ModalInternalProps> = ({
 };
 
 ModalInternal.defaultProps = {
-  animationIn: 'fadeDownBigIn',
-  animationOut: 'fadeDownBigOut',
+  animationIn: 'fadeInDownBig',
+  animationOut: 'fadeOutDownBig',
   mask: true,
   maskCloseable: true,
   verticalLayout: 'bottom',

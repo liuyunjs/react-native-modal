@@ -35,6 +35,7 @@ export default function App() {
         Show Modal2
       </Text>
       <Modal
+        animationIn="slideInDown"
         // mask={false}
         // animationConf={{ duration: 1000 }}
         // contentContainerStyle={{

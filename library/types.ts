@@ -1,29 +1,33 @@
 import { StyleProp, ViewStyle } from 'react-native';
-import { RMotionProps } from 'rmotion';
+import { RMotionProps, OneOfAnimConf } from 'rmotion';
 import React from 'react';
 import type { PortalProps } from 'react-native-portal-view/dist/Portal';
 import type { AdapterProps } from 'rn-darkly/dist/darkly';
-import {
-  BounceType,
-  FadeType,
-  FlipType,
-  SlideType,
-  ZoomType,
-} from 'rmotion/dist/animations/main';
 
-type FadeInAnimations = `fade${FadeType}In`;
-type FadeOutAnimations = `fade${FadeType}Out`;
+import * as animations from 'rmotion/dist/animations/main';
+// type FadeType =
 
-type FlipInAnimations = `flip${FlipType}In`;
-type FlipOutAnimations = `flip${FlipType}Out`;
+// animations.fa
 
-type SlideInAnimations = `slide${SlideType}In`;
-type SlideOutAnimations = `slide${SlideType}Out`;
+type SlideType = 'Down' | 'Up' | 'Left' | 'Right';
+type FlipType = 'X' | 'Y';
+type ZoomType = SlideType | '';
+type FadeType = ZoomType | 'DownBig' | 'UpBig' | 'LeftBig' | 'RightBig';
+type BounceType = ZoomType;
 
-type ZoomInAnimations = `zoom${ZoomType}In`;
-type ZoomOutAnimations = `zoom${ZoomType}Out`;
-type BounceInAnimations = `bounce${BounceType}In`;
-type BounceOutAnimations = `bounce${BounceType}Out`;
+type FadeInAnimations = `fadeIn${FadeType}`;
+type FadeOutAnimations = `fadeOut${FadeType}`;
+
+type FlipInAnimations = `flipIn${FlipType}`;
+type FlipOutAnimations = `flipOut${FlipType}`;
+
+type SlideInAnimations = `slideIn${SlideType}`;
+type SlideOutAnimations = `slideOut${SlideType}`;
+
+type ZoomInAnimations = `zoomIn${ZoomType}`;
+type ZoomOutAnimations = `zoomOut${ZoomType}`;
+type BounceInAnimations = `bounceIn${BounceType}`;
+type BounceOutAnimations = `bounceOut${BounceType}`;
 
 type LightSpeedInAnimations = 'lightSpeedIn';
 type LightSpeedOutAnimations = 'lightSpeedOut';
@@ -98,7 +102,7 @@ export type ModalInternalProps = {
   // 自定义动画
   animation?: AnimationPresupposition;
   // 自定义动画配置
-  animationConf?: RMotionProps['config'];
+  animationConf?: OneOfAnimConf;
   // 在模态框将要关闭的时候收起键盘
   keyboardDismissWillHide?: boolean;
   // backHandlerReaction?: boolean;
