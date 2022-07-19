@@ -19,3 +19,4 @@ app.json
 library
 tsconfig.json
 rollup.config.js
+.bundle

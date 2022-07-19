@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DefaultStore, Portal, PortalStore } from 'react-native-portal-view';
 import { useReactionState } from '@liuyunjs/hooks/lib/useReactionState';
+import { useReactCallback } from '@liuyunjs/hooks/lib/useReactCallback';
 import type { DarklyProps } from 'rn-darkly/dist/darkly';
 import { extend } from './extend';
 import { ModalityProps } from './types';
@@ -19,10 +20,10 @@ export const withModal = <T extends {}>(
   }) => {
     const [visible, setVisible] = useReactionState(!!visibleInput);
 
-    const onRequestClose = () => {
+    const onRequestClose = useReactCallback(() => {
       onChange?.(false);
       setVisible(false);
-    };
+    });
 
     const elem = visible ? (
       <Component {...(rest as any)} onRequestClose={onRequestClose} />
